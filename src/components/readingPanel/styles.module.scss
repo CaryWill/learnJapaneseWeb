@@ -1,14 +1,15 @@
 .readingPanel {
     width: 1000px;
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
+    align-items: left;
     padding: 10px 30px;
     border: 1px solid gray;
+    text-align: left;
     .title {
         font-size: 28px;
         margin: 10px 0;
+        text-align: center;
     }
 }
