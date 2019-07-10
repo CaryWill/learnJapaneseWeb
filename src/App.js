@@ -5,7 +5,7 @@ import createSagaMiddleware from "redux-saga";
 // TODO: use babel-plugin-module-resolver
 import { rootReducer } from "./reducers";
 import rootSaga from "./sagas";
-import { Sidebar } from "./components";
+import { Sidebar, ReadingPanel } from "./components";
 import styles from "./styles/styles.module.scss";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -26,6 +26,7 @@ function App() {
     <Provider store={store}>
       <div className={styles.app}>
         <Sidebar />
+        <ReadingPanel />
       </div>
     </Provider>
   );

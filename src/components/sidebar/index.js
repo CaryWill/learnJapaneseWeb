@@ -1,17 +1,17 @@
-import React, { Component, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Input } from "antd";
 import styles from "./styles.module.scss";
 import { connect } from "react-redux";
-import "antd/dist/antd.css";
-import { updatePosts } from "../../actions";
+import { updatePosts, updateCurrentReadPostId } from "../../actions";
 
 const { Search } = Input;
-
-const Sidebar = ({ dispatch }) => {
-  useEffect(() => {
-    dispatch(updatePosts("music"));
-  },[]);
-  return (
+class Sidebar extends React.Component {
+  componentDidMount() {
+    this.props.dispatch(updatePosts());
+  }
+  
+  render(){
+    return (
     <div className={styles.sidebar}>
       <div className={styles.logoBox}>
         <img
@@ -27,8 +27,25 @@ const Sidebar = ({ dispatch }) => {
         size="large"
         onSearch={value => console.log(value)}
       />
+      <section className={styles.recentPosts}>
+        <span className={styles.recentPostsHeader}>近期文章</span>
+        {this.props.posts.all.slice(0, 10).map((p,index) => (
+          <div className={styles.postRow} key={p.title}>
+            <span
+              className={styles.postRowTitle}
+            >
+              <button onClick={() => {
+                this.props.dispatch(updateCurrentReadPostId(p.id));
+              }} />
+              {p.title}
+            </span>
+            <span>{p.date}</span>
+          </div>
+        ))}
+      </section>
     </div>
   );
-};
+  }
+}
 
-export default connect()(Sidebar);
+export default connect(({ posts }) => ({ posts }))(Sidebar);
