@@ -9,6 +9,13 @@
             "ant"
         ],
         [
+            "import",
+            {
+                "libraryName": "antd",
+                "style": "css"
+            }
+        ],
+        [
             "module-resolver",
             {
                 "alias": {

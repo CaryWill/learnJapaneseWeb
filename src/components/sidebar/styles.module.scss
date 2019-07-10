@@ -1,26 +1,57 @@
 .sidebar {
-    max-width: 413px;
-    width: 30%;
-    height: 100%;
-    border: 2px solid gray;
-}
-.logo {
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 400px;
+  height: 100%;
+  border: 1px solid gray;
+  padding: 40px !important;
 }
 
+// Logo
+.logoBox {
+  text-align: center;
+  .logo {
+    width: 100%;
+  }
+  .slogan {
+    font-size: 18px;
+    font-weight: bold;
+  }
+}
+
+// 搜索
+.searchbar {
+    width: 100% !important;
+    margin: 10px 0 !important;
+}
+
+
+// 近期文章
 .recentPosts {
-    padding: 0 10px 0 10px;
-    .recentPostsHeader {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 20px;
+  .recentPostsHeader {
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 20px;
+  }
+  .postRow {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid grey;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    .postRowTitle {
+        cursor: pointer;
         font-size: 16px;
-        font-weight: bold;
-        color: black;
     }
-    .postRow {
-        display: flex;
-        flex-direction: column;
-        border-bottom: 1px solid grey;
-        .postRowTitle {
-            text-decoration: underline;
-        }
+    .postRowTimestamp {
+       font-size: 12px; 
     }
+  }
 }
