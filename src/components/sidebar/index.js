@@ -3,7 +3,6 @@ import { Input } from "antd";
 import styles from "./styles.module.scss";
 import { connect } from "react-redux";
 import { updatePosts, updateCurrentReadPostId } from "../../actions";
-import { posts } from "../../reducers/posts";
 
 const { Search } = Input;
 class Sidebar extends React.Component {
