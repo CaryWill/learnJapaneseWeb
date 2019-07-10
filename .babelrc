@@ -1,0 +1,20 @@
+{
+    "plugins": [
+        [
+            "import",
+            {
+                "libraryName": "antd",
+                "libraryDirectory": "lib"
+            },
+            "ant"
+        ],
+        [
+            "module-resolver",
+            {
+                "alias": {
+                    "@": "./src"
+                }
+            }
+        ]
+    ]
+}
