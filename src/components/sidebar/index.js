@@ -1,12 +1,16 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import { Input } from "antd";
 import styles from "./styles.module.scss";
-import { connect } from "react-redux"
+import { connect } from "react-redux";
 import "antd/dist/antd.css";
+import { updatePosts } from "../../actions";
 
 const { Search } = Input;
 
-export const Sidebar = props => {
+const Sidebar = ({ dispatch }) => {
+  useEffect(() => {
+    dispatch(updatePosts("music"));
+  },[]);
   return (
     <div className={styles.sidebar}>
       <div className={styles.logoBox}>
@@ -23,7 +27,8 @@ export const Sidebar = props => {
         size="large"
         onSearch={value => console.log(value)}
       />
-      
     </div>
   );
 };
+
+export default connect()(Sidebar);
