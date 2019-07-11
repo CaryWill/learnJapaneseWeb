@@ -1,3 +1,5 @@
+@import "src/styles/utils.scss";
+
 .readingPanel {
     width: 1000px;
     display: flex;
@@ -8,6 +10,11 @@
     border: 1px solid gray;
     text-align: left;
     overflow: scroll;
+    @include respond-to(mobile) {
+        width: 100%;
+        border-bottom: none;
+        height: calc(100% - 250px);
+    }
     .title {
         font-size: 28px;
         margin: 10px 0;

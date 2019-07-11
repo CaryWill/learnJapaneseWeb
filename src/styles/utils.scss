@@ -1,0 +1,15 @@
+@import "./variables.scss";
+
+/**
+ * 两种尺寸
+ * mobile & desktop
+ */
+@mixin respond-to($media) {
+  @if $media == mobile {
+    @media only screen and (max-width: $sm-screen) {
+      @content;
+    }
+  } @else {
+      @content;
+  }
+}

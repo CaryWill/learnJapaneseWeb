@@ -1,3 +1,5 @@
+@import "src/styles/utils.scss";
+
 .sidebar {
   display: flex;
   flex-direction: column;
@@ -7,6 +9,14 @@
   border: 1px solid gray;
   padding: 40px !important;
   overflow: scroll;
+  position: relative;
+  @include respond-to(mobile) {
+    flex-direction: row;
+    width: 100%;
+    height: 250px;
+    padding: 0 !important;
+    justify-content: space-between;
+  }
 }
 
 // Logo
@@ -19,21 +29,34 @@
     font-size: 18px;
     font-weight: bold;
   }
+  @include respond-to(mobile) {
+    width: 200px;
+  }
 }
 
 // 搜索
 .searchbar {
-    width: 100% !important;
-    margin: 10px 0 !important;
+  width: 100% !important;
+  margin: 10px 0 !important;
+  @include respond-to(mobile) {
+    display: none !important;
+  }
 }
-
 
 // 近期文章
 .recentPosts {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 20px;
+  @include respond-to(mobile) {
+    width: 200px;
+    margin-right: 30px;
+    padding: 20px !important;
+    height: 200px;
+    margin-top: 0;
+    overflow: scroll;
+  }
   .recentPostsHeader {
     font-size: 16px;
     font-weight: bold;
@@ -46,12 +69,26 @@
     border-bottom: 1px solid grey;
     padding-bottom: 10px;
     margin-bottom: 10px;
+    @include respond-to(mobile) {
+      width: 100% !important;
+    }
     .postRowTitle {
-        cursor: pointer;
-        font-size: 16px;
+      cursor: pointer;
+      font-size: 16px;
+      color: gray;
     }
     .postRowTimestamp {
-       font-size: 12px; 
+      font-size: 12px;
     }
+  }
+}
+
+.categoryRow {
+  border-bottom: 1px solid grey;
+  padding: 10px 0;
+  color: gray;
+  .count {
+    color: lightgray;
+    padding-left: 5px;
   }
 }
