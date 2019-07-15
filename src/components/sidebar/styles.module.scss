@@ -1,36 +1,44 @@
 @import "src/styles/utils.scss";
 
+nav {
+  display: none !important;
+  @include respond-to(mobile) {
+   width: 100%;
+  display: flex !important;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 20px;
+  }
+  .item {
+    display: block;
+    padding: 0 10px;
+    height: 30px;
+    line-height: 30px;
+    color: rgb(146,153,163);
+    &:hover {
+      background-color: rgb(242,243,243);
+      color: rgb(120,129,141);
+      border-radius: 6px;
+    }
+  }
+}
+
 .sidebar {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   width: 400px;
-  border: 1px solid gray;
   padding: 40px !important;
   overflow: scroll;
   position: relative;
   @include respond-to(mobile) {
     flex-direction: row;
     width: 100%;
-    height: 250px;
+    height: 50px;
     padding: 0 !important;
     justify-content: space-between;
-  }
-}
-
-// Logo
-.logoBox {
-  text-align: center;
-  .logo {
-    width: 100%;
-  }
-  .slogan {
-    font-size: 18px;
-    font-weight: bold;
-  }
-  @include respond-to(mobile) {
-    width: 200px;
   }
 }
 
@@ -56,26 +64,30 @@
     height: 200px;
     margin-top: 0;
     overflow: scroll;
+    display: none;
   }
   .recentPostsHeader {
-    font-size: 16px;
+    font-size: 25px;
     font-weight: bold;
     color: black;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
   .postRow {
     display: flex;
     flex-direction: column;
-    border-bottom: 1px solid grey;
-    padding-bottom: 10px;
-    margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 6px;
+    color: black;
+    cursor: pointer;
+    &:hover {
+      background-color: black;
+      color: white;
+    }
     @include respond-to(mobile) {
       width: 100% !important;
     }
     .postRowTitle {
-      cursor: pointer;
-      font-size: 16px;
-      color: gray;
+      font-size: 14px;
     }
     .postRowTimestamp {
       font-size: 12px;
@@ -84,11 +96,21 @@
 }
 
 .categoryRow {
-  border-bottom: 1px solid grey;
-  padding: 10px 0;
-  color: gray;
+  display: flex;
+  flex-direction: row;
+  padding: 8px;
+  border-radius: 6px;
+  color: black;
+  font-size: 14px;
+  cursor: pointer;
+  &:hover {
+    background-color: black;
+    color: white;
+  }
+  @include respond-to(mobile) {
+    width: 100% !important;
+  }
   .count {
-    color: lightgray;
     padding-left: 5px;
   }
 }

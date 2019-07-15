@@ -31,12 +31,11 @@ class Sidebar extends React.Component {
           <span className={styles.recentPostsHeader}>近期文章</span>
         )}
         {articles.slice(0, limit).map(p => (
-          <div className={styles.postRow} key={p.title}>
+          <div className={styles.postRow} key={p.title} onClick={() => {
+                this.props.dispatch(updateCurrentReadPostId(p.id));
+              }}>
             <span
               className={styles.postRowTitle}
-              onClick={() => {
-                this.props.dispatch(updateCurrentReadPostId(p.id));
-              }}
             >
               {p.title}
             </span>
@@ -54,7 +53,6 @@ class Sidebar extends React.Component {
       p = [...p, ...c.categories];
       return p;
     }, []);
-    console.log(categories);
     const uniqueCategories = [...new Set(categories)];
 
     return (
@@ -73,6 +71,18 @@ class Sidebar extends React.Component {
       </section>
     );
   };
+
+  renderHeader = () => {
+    return(
+      <nav>
+        {["近期文章", "分类"].map(c =>{
+          return(
+          <span className={styles.item}>{c}</span>
+        )})
+        }
+      </nav>
+    )
+  }
 
   render() {
     const { posts: articles } = this.props;
@@ -93,19 +103,12 @@ class Sidebar extends React.Component {
             false
           )}
         </Modal>
-        <div className={styles.logoBox}>
-          <img
-            src={`${process.env.PUBLIC_URL}/icon.png`}
-            alt="icon"
-            className={styles.logo}
-          />
-          <span className={styles.slogan}>こんにちは。</span>
-        </div>
         <Search
           placeholder="搜索"
           onSearch={value => this.onSearch(value)}
           className={styles.searchbar}
         />
+        {this.renderHeader()}
         {this.renderPosts(articles.all, 10)}
         {this.renderCategories(articles.all)}
       </div>

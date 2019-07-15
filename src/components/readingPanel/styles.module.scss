@@ -1,23 +1,36 @@
 @import "src/styles/utils.scss";
 
 .readingPanel {
-    width: 1000px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: left;
-    padding: 10px 30px;
-    border: 1px solid gray;
-    text-align: left;
-    overflow: scroll;
-    @include respond-to(mobile) {
-        width: 100%;
-        border-bottom: none;
-        height: calc(100% - 250px);
+  width: 1000px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: left;
+  padding: 10px 30px;
+  border-left: 1px solid lightGrey;
+  border-top: none;
+  text-align: left;
+  overflow: scroll;
+  color: black;
+  font-family: Helvetica, sans-serif;
+  @include respond-to(mobile) {
+    width: 100%;
+    border-bottom: none;
+    height: calc(100% - 250px);
+    border-top: 1px solid lightGrey;
+    border-left: none;
+  }
+  .title {
+    font-size: 28px;
+    margin: 10px 0;
+    text-align: center;
+  }
+
+  :global {
+    .markdown-body {
+      font-family: Helvetica, sans-serif;
+      color: black;
+      font-size: 14px;
     }
-    .title {
-        font-size: 28px;
-        margin: 10px 0;
-        text-align: center;
-    }
+  }
 }
