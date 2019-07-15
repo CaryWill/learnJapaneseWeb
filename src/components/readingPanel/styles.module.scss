@@ -16,7 +16,7 @@
   @include respond-to(mobile) {
     width: 100%;
     border-bottom: none;
-    height: calc(100% - 250px);
+    height: calc(100% - 50px);
     border-top: 1px solid lightGrey;
     border-left: none;
   }

@@ -58,13 +58,12 @@ nav {
   width: 100%;
   margin-top: 20px;
   @include respond-to(mobile) {
-    width: 200px;
+    width: 100%;
     margin-right: 30px;
     padding: 20px !important;
     height: 200px;
     margin-top: 0;
     overflow: scroll;
-    display: none;
   }
   .recentPostsHeader {
     font-size: 25px;
@@ -112,5 +111,12 @@ nav {
   }
   .count {
     padding-left: 5px;
+  }
+}
+
+.desktop {
+  width: 100%;
+  @include respond-to(mobile) {
+   display: none;
   }
 }
