@@ -1,7 +1,7 @@
 @import "src/styles/utils.scss";
 
 .readingPanel {
-  width: 1000px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -14,7 +14,6 @@
   color: black;
   font-family: "IBM Plex Mono", monospace;
   @include respond-to(mobile) {
-    width: 100%;
     border-bottom: none;
     height: calc(100% - 50px);
     border-top: 1px solid lightGrey;

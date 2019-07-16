@@ -55,7 +55,10 @@ class Sidebar extends React.Component {
         )}
         {articles.slice(0, this.state.isViewAllPosts ? limit : 3).map(p => (
           <div
-            className={classNames(styles.postRow, this.props.currentReadPostId === p.id && styles.active)}
+            className={classNames(
+              styles.postRow,
+              this.props.currentReadPostId === p.id && styles.active
+            )}
             key={p._id}
             onClick={() => {
               this.props.dispatch(updateCurrentReadPostId(p.id));
