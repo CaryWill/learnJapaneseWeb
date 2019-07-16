@@ -15,6 +15,10 @@
 
 - [X] 搜索功能的实现
 
-- [ ] 编辑的时候的 markdown preview
+- [X] 编辑的时候的 markdown preview
 
 - [ ] 文章的再编辑功能
+
+- [ ] logout 功能
+
+- [ ] 自动登陆
