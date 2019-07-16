@@ -4,18 +4,20 @@ import { postApi } from "../../services";
 import classNames from "classnames";
 import { connect } from "react-redux";
 import uuid from "uuid/v4";
+import ReactMarkdown from "react-markdown/with-html";
 
 class CreatePostModal extends React.Component {
   // TODO: 增加 tag 也就是 category 的功能
   state = {
     title: "",
-    body: ""
+    body: "",
+    showPreview: true
   };
 
-  titleInputRef = React.createRef()
+  titleInputRef = React.createRef();
 
   componentDidMount() {
-    this.titleInputRef.current.focus()
+    this.titleInputRef.current.focus();
   }
 
   onChangeTitleInput = event => {
@@ -35,10 +37,23 @@ class CreatePostModal extends React.Component {
     const categories = ["Others"];
     const id = uuid();
     const description = "";
-    const params = {date, artist, type, title, body, categories, id, description}
+    const params = {
+      date,
+      artist,
+      type,
+      title,
+      body,
+      categories,
+      id,
+      description
+    };
 
-    postApi(params).then(this.props.onCancel)
-  }
+    postApi(params).then(this.props.onCancel);
+  };
+
+  togglePreview = () => {
+    this.setState(prevState => ({ showPreview: !prevState.showPreview }));
+  };
 
   render() {
     return (
@@ -54,9 +69,21 @@ class CreatePostModal extends React.Component {
           <textarea
             placeholder="Write the post, change the world..."
             onChange={this.onChangeBodyInput}
+            value={this.state.body}
           />
           <div className={styles.actionBar}>
-            <span className={classNames(styles.base, styles.cancel)} onClick={this.props.onCancel}>取消</span>
+            <span
+              className={classNames(styles.base, styles.cancel)}
+              onClick={this.props.onCancel}
+            >
+              取消
+            </span>
+            <span
+              className={classNames(styles.base, styles.previewBtn)}
+              onClick={this.togglePreview}
+            >
+              {this.state.showPreview ? "预览" : "关闭预览"}
+            </span>
             <span
               className={classNames(styles.base, styles.confirm)}
               onClick={this.publish}
@@ -65,9 +92,19 @@ class CreatePostModal extends React.Component {
             </span>
           </div>
         </div>
+        {this.state.showPreview && (
+          <div className={styles.preview}>
+            <span className={styles.title}>{this.state.title}</span>
+            <ReactMarkdown
+              className="markdown-body"
+              escapeHtml={false}
+              source={this.state.body}
+            />
+          </div>
+        )}
       </div>
     );
   }
 }
 
-export default connect(({user})=>({user}))(CreatePostModal)
+export default connect(({ user }) => ({ user }))(CreatePostModal);

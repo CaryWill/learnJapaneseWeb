@@ -1,3 +1,5 @@
+@import "src/styles/utils.scss";
+
 .modal {
   width: 100%;
   height: 100%;
@@ -9,19 +11,23 @@
   background: rgba(233, 234, 236, 0.9);
   left: 0;
   top: 0;
+  flex-direction: row;
+  @include respond-to(mobile) {
+    flex-direction: column;
+  }
 }
 
 .body {
-  width: 80%;
-  height: 80%;
+  width: 100%;
+  height: 100%;
   // background: rgb(233, 234, 236);
-  background-color: white;
-  border-radius: 4px;
+  background: #2d3047;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   text-align: center;
   padding: 20px;
+  color: white;
   input {
     background-color: transparent;
     border: none;
@@ -70,6 +76,14 @@
   }
 }
 
+.previewBtn {
+  &:hover {
+    background-color: #00a896;
+    color: white;
+    border-radius: 6px;
+  }
+}
+
 .base {
   display: block;
   align-self: flex-end;
@@ -78,10 +92,26 @@
   line-height: 35px;
   color: rgb(135, 143, 154);
   background-color: rgb(233, 234, 236);
-  width: 65px;
   border-radius: 7px;
   font-size: 17px;
   cursor: pointer;
   margin: 0 5px;
   text-align: center;
+}
+
+.preview {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  background-color: white;
+  .title {
+    border-bottom: rgb(233, 234, 236);
+    font-size: 27px;
+  }
+  :global {
+    .markdown-body {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 17px;
+    }
+  }
 }
