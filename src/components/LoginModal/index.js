@@ -11,6 +11,12 @@ class LoginModal extends React.Component {
     errmsg: ""
   };
 
+  emailRef = React.createRef();
+
+  componentDidMount() {
+    this.emailRef.current.focus();
+  }
+
   onEmailChange = event => {
     this.setState({ email: event.target.value, errmsg: "" });
   };
@@ -41,6 +47,7 @@ class LoginModal extends React.Component {
             value={this.state.email}
             onChange={this.onEmailChange}
             placeholder="邮箱"
+            ref={this.emailRef}
           />
           <input
             value={this.state.password}

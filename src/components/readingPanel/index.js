@@ -1,8 +1,7 @@
 import React from "react";
 import styles from "./styles.module.scss";
 import { connect } from "react-redux";
-import ReactMarkdown from "react-markdown";
-import htmlParser from "react-markdown/plugins/html-parser";
+import ReactMarkdown from "react-markdown/with-html";
 import { CreatePostModal } from "..";
 import { updatePosts } from "../../actions";
 
@@ -12,13 +11,6 @@ class ReadingPanel extends React.Component {
   renderContent = () => {
     const { posts, currentReadPostId } = this.props;
     const post = posts.all.find(p => p.id === currentReadPostId);
-
-    const parseHtml = htmlParser({
-      isValidNode: node => node.type !== "script",
-      processingInstructions: [
-        /* ... */
-      ]
-    });
 
     let body;
     if (posts.all.length === 0 || currentReadPostId === "") {
@@ -36,7 +28,7 @@ class ReadingPanel extends React.Component {
       body = (
         <ReactMarkdown
           className="markdown-body"
-          astPlugins={[parseHtml]}
+          escapeHtml={false}
           source={(post && post.body) || post.description || "404"}
         />
       );

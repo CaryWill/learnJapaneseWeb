@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import uuid from "uuid/v4";
 
 class CreatePostModal extends React.Component {
-  // TODO: 增加 category 的功能
+  // TODO: 增加 tag 也就是 category 的功能
   state = {
     title: "",
     body: ""
