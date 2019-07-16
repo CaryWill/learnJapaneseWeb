@@ -2,7 +2,8 @@ import React from "react";
 import { Input, Modal } from "antd";
 import styles from "./styles.module.scss";
 import { connect } from "react-redux";
-import { updatePosts, updateCurrentReadPostId } from "../../actions";
+import { updatePosts, updateCurrentReadPostId, login } from "../../actions";
+import classNames from "classnames";
 
 const { Search } = Input;
 class Sidebar extends React.Component {
@@ -25,10 +26,6 @@ class Sidebar extends React.Component {
   };
 
   renderPosts = (articles, limit = 10, showTitle = true) => {
-    const conditions = [];
-    const filteredArticles = articles.filter(p =>
-      p.description.toLowerCase().includes(this.state.searchKeyword)
-    );
     return (
       <section className={styles.recentPosts}>
         {articles && articles.length > 0 && showTitle && (
@@ -37,10 +34,10 @@ class Sidebar extends React.Component {
         {articles.slice(0, limit).map(p => (
           <div
             className={styles.postRow}
-            key={p.title}
+            key={p._id}
             onClick={() => {
               this.props.dispatch(updateCurrentReadPostId(p.id));
-              this.setState({ showSearchResultModal : false});
+              this.setState({ showSearchResultModal: false });
             }}
           >
             <span className={styles.postRowTitle}>{p.title}</span>
@@ -85,7 +82,7 @@ class Sidebar extends React.Component {
         {["近期文章" /** , "分类"*/].map((c, index) => {
           return (
             <span
-              className={styles.item}
+              className={classNames(styles.item, styles.mobile)}
               onClick={() => this.setState({ showSearchResultModal: true })}
               key={index}
             >
@@ -93,6 +90,9 @@ class Sidebar extends React.Component {
             </span>
           );
         })}
+        <span className={styles.item} onClick={()=> this.props.dispatch(login("admin","admin"))}>{
+          this.props.user.status === "success" ? this.props.user.email : "登陆"
+        }</span>
       </nav>
     );
   };
@@ -110,18 +110,18 @@ class Sidebar extends React.Component {
         >
           {this.renderPosts(
             articles.all.filter(p =>
-              p.description.toLowerCase().includes(this.state.searchKeyword)
+              p.description ? p.description.toLowerCase().includes(this.state.searchKeyword) : p
             ),
             100,
             false
           )}
         </Modal>
+        {this.renderHeader()}
         <Search
           placeholder="搜索"
           onSearch={value => this.onSearch(value)}
           className={styles.searchbar}
         />
-        {this.renderHeader()}
         <div className={styles.desktop}>
           {this.renderPosts(articles.all, 10)}
         </div>
@@ -133,4 +133,4 @@ class Sidebar extends React.Component {
   }
 }
 
-export default connect(({ posts }) => ({ posts }))(Sidebar);
+export default connect(({ posts, user }) => ({ posts, user }))(Sidebar);

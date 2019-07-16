@@ -1,9 +1,9 @@
 @import "src/styles/utils.scss";
 
 nav {
-  display: none !important;
+  width: 100%;
+  text-align: right;
   @include respond-to(mobile) {
-   width: 100%;
   display: flex !important;
   flex-direction: row;
   justify-content: flex-end;
@@ -16,6 +16,7 @@ nav {
     height: 30px;
     line-height: 30px;
     color: rgb(146,153,163);
+    cursor: pointer;
     &:hover {
       background-color: rgb(242,243,243);
       color: rgb(120,129,141);
@@ -117,6 +118,12 @@ nav {
 .desktop {
   width: 100%;
   @include respond-to(mobile) {
-   display: none;
+   display: none !important;
+  }
+}
+
+.mobile {
+  @include respond-to(desktop) {
+   display: none !important;
   }
 }

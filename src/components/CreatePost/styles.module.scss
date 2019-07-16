@@ -1,0 +1,86 @@
+.modal {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 4;
+  background: rgba(233, 234, 236, 0.9);
+  left: 0;
+  top: 0;
+}
+
+.body {
+  width: 80%;
+  height: 80%;
+  // background: rgb(233, 234, 236);
+  background-color: white;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: center;
+  padding: 20px;
+  input {
+    background-color: transparent;
+    border: none;
+    text-align: left;
+    width: 100%;
+  }
+  textarea:focus,
+  input:focus {
+    outline: none;
+  }
+  textarea {
+    resize: none;
+    border: none;
+    width: 100%;
+    height: 80%;
+    font-size: 20px;
+    background-color: transparent;
+    margin-bottom: 20px;
+  }
+  .inputTitle {
+    border-bottom: rgb(233, 234, 236);
+    font-size: 27px;
+  }
+}
+
+// action button
+.actionBar {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.confirm {
+  &:hover {
+    background-color: rgb(252, 248, 211);
+    color: black;
+    border-radius: 6px;
+  }
+}
+
+.cancel {
+  &:hover {
+    background-color: rgb(255, 125, 128);
+    color: white;
+    border-radius: 6px;
+  }
+}
+
+.base {
+  display: block;
+  align-self: flex-end;
+  padding: 0 10px;
+  height: 35px;
+  line-height: 35px;
+  color: rgb(135, 143, 154);
+  background-color: rgb(233, 234, 236);
+  width: 65px;
+  border-radius: 7px;
+  font-size: 17px;
+  cursor: pointer;
+  margin: 0 5px;
+}
