@@ -1,8 +1,9 @@
 import React from "react";
-import { Input, Modal } from "antd";
+import { Input } from "antd";
+import { LoginModal } from "..";
 import styles from "./styles.module.scss";
 import { connect } from "react-redux";
-import { updatePosts, updateCurrentReadPostId, login } from "../../actions";
+import { updatePosts, updateCurrentReadPostId } from "../../actions";
 import classNames from "classnames";
 
 const { Search } = Input;
@@ -10,7 +11,10 @@ class Sidebar extends React.Component {
   state = {
     isDropdown: false,
     showSearchResultModal: false,
-    searchKeyword: ""
+    showLoginModal: false,
+    searchKeyword: "",
+    isViewAllPosts: false,
+    currentOpenedCategory: ""
   };
 
   componentDidMount() {
@@ -25,13 +29,31 @@ class Sidebar extends React.Component {
     this.setState({ showSearchResultModal: false });
   };
 
-  renderPosts = (articles, limit = 10, showTitle = true) => {
+  dismissLoginModal = () => {
+    this.setState({ showLoginModal: false });
+  };
+
+  toggleViewAllPosts = () => {
+    this.setState(prevState => {
+      return { isViewAllPosts: !prevState.isViewAllPosts };
+    });
+  };
+
+  renderPosts = (articles, limit = 200, showTitle = true) => {
     return (
       <section className={styles.recentPosts}>
         {articles && articles.length > 0 && showTitle && (
-          <span className={styles.recentPostsHeader}>近期文章</span>
+          <div className={styles.postsHeaderBox}>
+            <span className={styles.recentPostsHeader}>近期文章</span>
+            <span
+              className={styles.viewAllPosts}
+              onClick={this.toggleViewAllPosts}
+            >
+              {this.state.isViewAllPosts ? "收起" : "查看全部"}
+            </span>
+          </div>
         )}
-        {articles.slice(0, limit).map(p => (
+        {articles.slice(0, this.state.isViewAllPosts ? limit : 3).map(p => (
           <div
             className={styles.postRow}
             key={p._id}
@@ -50,7 +72,7 @@ class Sidebar extends React.Component {
     );
   };
 
-  renderCategories = articles => {
+  renderCategories = (articles = []) => {
     const categories = articles.reduce((p, c) => {
       p = [...p, ...c.categories];
       return p;
@@ -64,12 +86,44 @@ class Sidebar extends React.Component {
         )}
         {uniqueCategories.map((c, index) => {
           return (
-            <div className={styles.categoryRow} key={index}>
-              <span>{c}</span>
-              <span className={styles.count}>{`(${
-                articles.filter(a => a.categories.includes(c)).length
-              })`}</span>
-            </div>
+            <React.Fragment key={c}>
+              <div
+                className={styles.categoryRow}
+                key={index}
+                onClick={() => this.setState({ currentOpenedCategory: c })}
+              >
+                <div className={styles.categoryRowText}>
+                  <span>{c}</span>
+                  <span className={styles.count}>{`(${
+                    articles.filter(a => a.categories.includes(c)).length
+                  })`}</span>
+                </div>
+                <span>
+                  {this.state.currentOpenedCategory === c ? "∙" : "◦"}
+                </span>
+              </div>
+              {this.state.currentOpenedCategory === c && (
+                <div className={styles.postsByCategory}>
+                  {articles
+                    .filter(a => a.categories.includes(c))
+                    .map(p => (
+                      <div
+                        className={styles.categoryPostRow}
+                        onClick={() => {
+                          this.props.dispatch(updateCurrentReadPostId(p.id));
+                          this.setState({ showSearchResultModal: false });
+                        }}
+                        key={p._id}
+                      >
+                        <span className={styles.postRowTitle}>{p.title}</span>
+                        <span className={styles.postRowTimestamp}>
+                          {p.date.slice(0, 10)}
+                        </span>
+                      </div>
+                    ))}
+                </div>
+              )}
+            </React.Fragment>
           );
         })}
       </section>
@@ -90,9 +144,16 @@ class Sidebar extends React.Component {
             </span>
           );
         })}
-        <span className={styles.item} onClick={()=> this.props.dispatch(login("admin","admin"))}>{
-          this.props.user.status === "success" ? this.props.user.email : "登陆"
-        }</span>
+        <span
+          className={classNames(styles.item, styles.login)}
+          onClick={() => {
+            this.setState({ showLoginModal: true });
+          }}
+        >
+          {this.props.user.status === "success"
+            ? this.props.user.email
+            : "登陆"}
+        </span>
       </nav>
     );
   };
@@ -102,20 +163,32 @@ class Sidebar extends React.Component {
 
     return (
       <div className={styles.sidebar}>
-        <Modal
-          title="文章"
-          onCancel={this.dismissSearchResultModal}
-          visible={this.state.showSearchResultModal}
-          footer={null}
-        >
-          {this.renderPosts(
-            articles.all.filter(p =>
-              p.description ? p.description.toLowerCase().includes(this.state.searchKeyword) : p
-            ),
-            100,
-            false
-          )}
-        </Modal>
+        {this.state.showLoginModal && (
+          <LoginModal onCancel={this.dismissLoginModal} />
+        )}
+        {this.state.showSearchResultModal && (
+          <div className={styles.modal}>
+            <div className={styles.body}>
+              <span
+                onClick={this.dismissSearchResultModal}
+                className={styles.closeSign}
+              >
+                &#10006;
+              </span>
+              {this.renderPosts(
+                articles.all.filter(p =>
+                  p.description
+                    ? p.description
+                        .toLowerCase()
+                        .includes(this.state.searchKeyword)
+                    : p
+                ),
+                100,
+                false
+              )}
+            </div>
+          </div>
+        )}
         {this.renderHeader()}
         <Search
           placeholder="搜索"
@@ -123,7 +196,7 @@ class Sidebar extends React.Component {
           className={styles.searchbar}
         />
         <div className={styles.desktop}>
-          {this.renderPosts(articles.all, 10)}
+          {this.renderPosts(articles.all, 100)}
         </div>
         <div className={styles.desktop}>
           {this.renderCategories(articles.all)}

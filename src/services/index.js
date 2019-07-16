@@ -8,6 +8,7 @@ export function fetchPostsApi(type) {
   });
 }
 
+// TODO: 考虑增加 lang 参数，后面可以根据 lang 来动态设置 font-family
 export function postApi({
   type,
   artist,

@@ -4,23 +4,28 @@ nav {
   width: 100%;
   text-align: right;
   @include respond-to(mobile) {
-  display: flex !important;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 0 20px;
+    display: flex !important;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 20px;
   }
   .item {
     display: block;
     padding: 0 10px;
     height: 30px;
     line-height: 30px;
-    color: rgb(146,153,163);
+    color: rgb(146, 153, 163);
     cursor: pointer;
     &:hover {
-      background-color: rgb(242,243,243);
-      color: rgb(120,129,141);
+      background-color: rgb(242, 243, 243);
+      color: rgb(120, 129, 141);
       border-radius: 6px;
+    }
+  }
+  .login {
+    @include respond-to(desktop) {
+      text-decoration: underline;
     }
   }
 }
@@ -33,7 +38,6 @@ nav {
   width: 400px;
   padding: 40px !important;
   overflow: scroll;
-  position: relative;
   @include respond-to(mobile) {
     flex-direction: row;
     width: 100%;
@@ -66,11 +70,21 @@ nav {
     margin-top: 0;
     overflow: scroll;
   }
+  .postsHeaderBox {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
   .recentPostsHeader {
     font-size: 25px;
     font-weight: bold;
     color: black;
-    margin-bottom: 10px;
+  }
+  .viewAllPosts {
+    font-size: 12px;
+    margin-bottom: 5px;
   }
   .postRow {
     display: flex;
@@ -102,6 +116,7 @@ nav {
   border-radius: 6px;
   color: black;
   font-size: 14px;
+  justify-content: space-between;
   cursor: pointer;
   &:hover {
     background-color: black;
@@ -115,15 +130,72 @@ nav {
   }
 }
 
+.postsByCategory {
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
+}
+
+.categoryPostRow {
+      display: flex;
+    flex-direction: column;
+    padding: 8px;
+    border-radius: 6px;
+    color: black;
+    cursor: pointer;
+    &:hover {
+      background-color: black;
+      color: white;
+    }
+    @include respond-to(mobile) {
+      width: 100% !important;
+    }
+    .postRowTitle {
+      font-size: 13px;
+    }
+    .postRowTimestamp {
+      font-size: 12px;
+    }
+}
+
 .desktop {
   width: 100%;
   @include respond-to(mobile) {
-   display: none !important;
+    display: none !important;
   }
 }
 
 .mobile {
-  @include respond-to(desktop) {
-   display: none !important;
+  display: none !important;
+  @include respond-to(mobile) {
+    display: flex !important;
+  }
+}
+
+.modal {
+   width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  flex-direction: column;
+  z-index: 4;
+  background: rgba(233, 234, 236, 0.9);
+  left: 0;
+  top: 0;
+  .body {
+    width: 90%;
+    height: 500px;
+    background: white;
+    border-radius: 8px;
+    padding: 0 10px;
+    position: relative;
+    .closeSign {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+    }
   }
 }

@@ -12,38 +12,29 @@
 }
 
 .body {
-  width: 80%;
-  height: 80%;
-  // background: rgb(233, 234, 236);
-  background-color: white;
-  border-radius: 4px;
+  width: 279px;
+  height: 179px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  text-align: center;
-  padding: 20px;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 8px;
   input {
     background-color: transparent;
     border: none;
     text-align: left;
-    width: 100%;
-  }
-  textarea:focus,
-  input:focus {
-    outline: none;
-  }
-  textarea {
-    resize: none;
-    border: none;
-    width: 100%;
-    height: 80%;
-    font-size: 20px;
-    background-color: transparent;
-    margin-bottom: 20px;
-  }
-  .inputTitle {
-    border-bottom: rgb(233, 234, 236);
-    font-size: 27px;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+    margin: 5px;
+    padding-left: 10px;
+    &:focus {
+      outline: none;
+    }
   }
 }
 
@@ -51,7 +42,8 @@
 .actionBar {
   width: 100%;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  margin-top: 16px;
 }
 
 .confirm {
@@ -74,14 +66,21 @@
   display: block;
   align-self: flex-end;
   padding: 0 10px;
-  height: 35px;
-  line-height: 35px;
-  color: rgb(135, 143, 154);
-  background-color: rgb(233, 234, 236);
-  width: 65px;
+  height: 25px;
+  line-height: 25px;
+  color: #878f9a;
+  background-color: #e9eaec;
+  width: 50px;
   border-radius: 7px;
-  font-size: 17px;
+  font-size: 14px;
   cursor: pointer;
   margin: 0 5px;
   text-align: center;
+}
+
+.errmsg {
+  text-align: center;
+  margin-top: 10px;
+  user-select: none;
+  color: #d90c24;
 }
