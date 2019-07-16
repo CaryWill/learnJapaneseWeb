@@ -1,5 +1,5 @@
 import React from "react";
-import { Input, Modal } from "antd";
+import { Input } from "antd";
 import { LoginModal } from "..";
 import styles from "./styles.module.scss";
 import { connect } from "react-redux";
@@ -86,7 +86,7 @@ class Sidebar extends React.Component {
         )}
         {uniqueCategories.map((c, index) => {
           return (
-            <>
+            <React.Fragment key={c}>
               <div
                 className={styles.categoryRow}
                 key={index}
@@ -113,6 +113,7 @@ class Sidebar extends React.Component {
                           this.props.dispatch(updateCurrentReadPostId(p.id));
                           this.setState({ showSearchResultModal: false });
                         }}
+                        key={p._id}
                       >
                         <span className={styles.postRowTitle}>{p.title}</span>
                         <span className={styles.postRowTimestamp}>
@@ -122,7 +123,7 @@ class Sidebar extends React.Component {
                     ))}
                 </div>
               )}
-            </>
+            </React.Fragment>
           );
         })}
       </section>
