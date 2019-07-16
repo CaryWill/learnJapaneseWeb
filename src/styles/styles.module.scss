@@ -1,6 +1,14 @@
+@import "./utils.scss";
+
 .app {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: row;
+    overflow: hidden;
+    // min-width: 900px;
+    @include respond-to(mobile) {
+     flex-direction: column;
+    //  min-width: unset;
+    }
 }

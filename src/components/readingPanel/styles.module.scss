@@ -1,15 +1,61 @@
+@import "src/styles/utils.scss";
+
 .readingPanel {
-    width: 1000px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: left;
-    padding: 10px 30px;
-    border: 1px solid gray;
-    text-align: left;
-    .title {
-        font-size: 28px;
-        margin: 10px 0;
-        text-align: center;
+  width: 1000px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: left;
+  padding: 20px 50px;
+  border-left: 1px solid lightGrey;
+  border-top: none;
+  text-align: left;
+  overflow: scroll;
+  color: black;
+  font-family: "IBM Plex Mono", monospace;
+  @include respond-to(mobile) {
+    width: 100%;
+    border-bottom: none;
+    height: calc(100% - 50px);
+    border-top: 1px solid lightGrey;
+    border-left: none;
+  }
+  .title {
+    font-size: 32px;
+    margin: 10px 0;
+    text-align: center;
+  }
+
+  :global {
+    .markdown-body {
+      font-family: "IBM Plex Mono", monospace;
+      color: black;
+      font-size: 17px;
     }
+  }
+}
+
+.placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  div:first-child {
+    font-size: 80px;
+  }
+}
+
+.createPostButton {
+  width: 85px;
+  height: 35px;
+  border-radius: 6px;
+  background: black;
+  color: white;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  outline: none;
+  cursor: pointer;
 }
