@@ -55,7 +55,7 @@ class Sidebar extends React.Component {
         )}
         {articles.slice(0, this.state.isViewAllPosts ? limit : 3).map(p => (
           <div
-            className={styles.postRow}
+            className={classNames(styles.postRow, this.props.currentReadPostId === p.id && styles.active)}
             key={p._id}
             onClick={() => {
               this.props.dispatch(updateCurrentReadPostId(p.id));
@@ -90,7 +90,13 @@ class Sidebar extends React.Component {
               <div
                 className={styles.categoryRow}
                 key={index}
-                onClick={() => this.setState({ currentOpenedCategory: c })}
+                onClick={() =>
+                  this.setState({
+                    // 重复点击可 toggle
+                    currentOpenedCategory:
+                      this.state.currentOpenedCategory === c ? "" : c
+                  })
+                }
               >
                 <div className={styles.categoryRowText}>
                   <span>{c}</span>
@@ -175,6 +181,7 @@ class Sidebar extends React.Component {
               >
                 &#10006;
               </span>
+              <span className={styles.modalTitle}>文章列表</span>
               {this.renderPosts(
                 articles.all.filter(p =>
                   p.description
@@ -206,4 +213,8 @@ class Sidebar extends React.Component {
   }
 }
 
-export default connect(({ posts, user }) => ({ posts, user }))(Sidebar);
+export default connect(({ posts, user, currentReadPostId }) => ({
+  posts,
+  user,
+  currentReadPostId
+}))(Sidebar);

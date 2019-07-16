@@ -38,12 +38,14 @@ nav {
   width: 400px;
   padding: 40px !important;
   overflow: scroll;
+  user-select: none;
   @include respond-to(mobile) {
     flex-direction: row;
     width: 100%;
     height: 50px;
     padding: 0 !important;
     justify-content: space-between;
+    overflow: unset;
   }
 }
 
@@ -66,7 +68,6 @@ nav {
     width: 100%;
     margin-right: 30px;
     padding: 20px !important;
-    height: 200px;
     margin-top: 0;
     overflow: scroll;
   }
@@ -93,6 +94,7 @@ nav {
     border-radius: 6px;
     color: black;
     cursor: pointer;
+    margin: 3px 0;
     &:hover {
       background-color: black;
       color: white;
@@ -106,6 +108,10 @@ nav {
     .postRowTimestamp {
       font-size: 12px;
     }
+  }
+  .active {
+    background-color: black;
+    color: white;
   }
 }
 
@@ -137,25 +143,25 @@ nav {
 }
 
 .categoryPostRow {
-      display: flex;
-    flex-direction: column;
-    padding: 8px;
-    border-radius: 6px;
-    color: black;
-    cursor: pointer;
-    &:hover {
-      background-color: black;
-      color: white;
-    }
-    @include respond-to(mobile) {
-      width: 100% !important;
-    }
-    .postRowTitle {
-      font-size: 13px;
-    }
-    .postRowTimestamp {
-      font-size: 12px;
-    }
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  border-radius: 6px;
+  color: black;
+  cursor: pointer;
+  &:hover {
+    background-color: black;
+    color: white;
+  }
+  @include respond-to(mobile) {
+    width: 100% !important;
+  }
+  .postRowTitle {
+    font-size: 13px;
+  }
+  .postRowTimestamp {
+    font-size: 12px;
+  }
 }
 
 .desktop {
@@ -173,7 +179,7 @@ nav {
 }
 
 .modal {
-   width: 100%;
+  width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -196,6 +202,12 @@ nav {
       top: 10px;
       right: 10px;
       cursor: pointer;
+    }
+    .modalTitle {
+      font-size: 19px;
+      margin-top: 46px;
+      display: block;
+      text-align: center;
     }
   }
 }

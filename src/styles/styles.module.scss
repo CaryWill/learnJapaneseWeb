@@ -6,9 +6,9 @@
     display: flex;
     flex-direction: row;
     overflow: hidden;
-    // min-width: 900px;
+    min-width: 755px;
     @include respond-to(mobile) {
      flex-direction: column;
-    //  min-width: unset;
+     min-width: unset;
     }
 }
