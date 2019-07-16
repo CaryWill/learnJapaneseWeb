@@ -23,6 +23,11 @@ nav {
       border-radius: 6px;
     }
   }
+  .login {
+    @include respond-to(desktop) {
+     text-decoration: underline;
+    }
+  }
 }
 
 .sidebar {
@@ -33,7 +38,6 @@ nav {
   width: 400px;
   padding: 40px !important;
   overflow: scroll;
-  position: relative;
   @include respond-to(mobile) {
     flex-direction: row;
     width: 100%;

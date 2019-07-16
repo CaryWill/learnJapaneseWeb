@@ -1,8 +1,9 @@
 import React from "react";
 import { Input, Modal } from "antd";
+import { LoginModal } from "..";
 import styles from "./styles.module.scss";
 import { connect } from "react-redux";
-import { updatePosts, updateCurrentReadPostId, login } from "../../actions";
+import { updatePosts, updateCurrentReadPostId } from "../../actions";
 import classNames from "classnames";
 
 const { Search } = Input;
@@ -10,6 +11,7 @@ class Sidebar extends React.Component {
   state = {
     isDropdown: false,
     showSearchResultModal: false,
+    showLoginModal: false,
     searchKeyword: ""
   };
 
@@ -23,6 +25,10 @@ class Sidebar extends React.Component {
 
   dismissSearchResultModal = () => {
     this.setState({ showSearchResultModal: false });
+  };
+
+  dismissLoginModal = () => {
+    this.setState({ showLoginModal: false });
   };
 
   renderPosts = (articles, limit = 10, showTitle = true) => {
@@ -90,9 +96,16 @@ class Sidebar extends React.Component {
             </span>
           );
         })}
-        <span className={styles.item} onClick={()=> this.props.dispatch(login("admin","admin"))}>{
-          this.props.user.status === "success" ? this.props.user.email : "登陆"
-        }</span>
+        <span
+          className={classNames(styles.item, styles.login)}
+          onClick={() => {
+            this.setState({ showLoginModal: true });
+          }}
+        >
+          {this.props.user.status === "success"
+            ? this.props.user.email
+            : "登陆"}
+        </span>
       </nav>
     );
   };
@@ -102,6 +115,9 @@ class Sidebar extends React.Component {
 
     return (
       <div className={styles.sidebar}>
+        {this.state.showLoginModal && (
+          <LoginModal onCancel={this.dismissLoginModal} />
+        )}
         <Modal
           title="文章"
           onCancel={this.dismissSearchResultModal}
@@ -110,7 +126,9 @@ class Sidebar extends React.Component {
         >
           {this.renderPosts(
             articles.all.filter(p =>
-              p.description ? p.description.toLowerCase().includes(this.state.searchKeyword) : p
+              p.description
+                ? p.description.toLowerCase().includes(this.state.searchKeyword)
+                : p
             ),
             100,
             false

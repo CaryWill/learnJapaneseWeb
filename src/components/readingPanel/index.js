@@ -24,7 +24,11 @@ class ReadingPanel extends React.Component {
     if (posts.all.length === 0 || currentReadPostId === "") {
       body = (
         <div className={styles.placeholder}>
-          <div>🌋</div>
+          <div>
+            <span role="img" aria-label="jsx-a11y/accessible-emoji">
+              🍩
+            </span>
+          </div>
           <div>Reading is the most wonderful thing in the world</div>
         </div>
       );
@@ -72,7 +76,7 @@ class ReadingPanel extends React.Component {
           this.props.user.email &&
           this.renderCreatePostButton()}
         {this.state.showCreatePostModal && (
-          <CreatePostModal onCancel={this.dismissCreatePostModal}/>
+          <CreatePostModal onCancel={this.dismissCreatePostModal} />
         )}
       </div>
     );
