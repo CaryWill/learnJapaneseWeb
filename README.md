@@ -11,7 +11,7 @@
 
 - [ ] sidebar 里面的文章分类（用 modal 展示？）
 
-- [ ] demo 页
+- [X] demo 页
 
 - [X] 搜索功能的实现
 
