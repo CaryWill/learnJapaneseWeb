@@ -9,7 +9,7 @@
 
 ## TODO
 
-- [ ] sidebar 里面的文章分类（用 modal 展示？）
+- [X] sidebar 里面的文章分类
 
 - [X] demo 页
 
