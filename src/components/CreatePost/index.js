@@ -82,7 +82,7 @@ class CreatePostModal extends React.Component {
               className={classNames(styles.base, styles.previewBtn)}
               onClick={this.togglePreview}
             >
-              {this.state.showPreview ? "预览" : "关闭预览"}
+              {this.state.showPreview ? "关闭预览" : "预览"}
             </span>
             <span
               className={classNames(styles.base, styles.confirm)}
