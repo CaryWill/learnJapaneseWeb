@@ -53,11 +53,16 @@
 }
 
 .createPostButton {
-  width: 85px;
   height: 35px;
+  padding: 0 15px;
+  margin: 0 2px;
   border-radius: 6px;
   background: black;
   color: white;
   outline: none;
   cursor: pointer;
+  user-select: none;
+  &:hover {
+    background: #34BE8B;
+  }
 }

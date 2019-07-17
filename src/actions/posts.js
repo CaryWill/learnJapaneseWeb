@@ -8,7 +8,6 @@ export function updatePosts(type) {
 }
 
 export function updateCurrentReadPostId(id) {
-    console.log(id)
     return {
         type: Actions.UPDATE_CURRENT_READ_POST_ID,
         payload: { id }
