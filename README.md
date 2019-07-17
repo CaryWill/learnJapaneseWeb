@@ -1,4 +1,6 @@
-# learn japanese demo
+# Share japanese-related stuff
+
+![img](https://github.com/CaryWill/learnJapaneseWeb/screenshots/screenshot1.png)
 
 ## Techs used:
 
