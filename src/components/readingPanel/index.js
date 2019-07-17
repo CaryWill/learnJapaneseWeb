@@ -87,6 +87,7 @@ class ReadingPanel extends React.Component {
     this.props.dispatch(updatePosts());
   };
 
+  // TODO: delete button should be red when hover
   renderPostActionButton = () => {
     return (
       <div className={styles.postActions}>
