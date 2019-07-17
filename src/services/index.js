@@ -41,3 +41,9 @@ export function loginApi(email, password) {
     }
   });
 }
+
+export function deletePostApi(id) {
+  return axios.delete("https://ljpdev.herokuapp.com/api/v1/posts", {
+    params: { id }
+  });
+}
