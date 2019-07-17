@@ -3,14 +3,9 @@ import * as ActionTypes from "./../actions/types";
 export const posts = (state = { all: [] }, action) => {
   switch (action.type) {
     case ActionTypes.UPDATE_POSTS_SUCCEEDED:
-      const { type, posts } = action.payload;
-
-      if (type) {
-        return { ...state, [type]: posts };
-      } else {
-        return { ...state, all: posts };
-      }
-
+    case ActionTypes.DELETE_POST_SUCCEEDED:
+      const { posts } = action.payload;
+      return { ...state, all: posts };
     default:
       return state;
   }

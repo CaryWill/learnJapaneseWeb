@@ -3,14 +3,19 @@ import styles from "./styles.module.scss";
 import { connect } from "react-redux";
 import ReactMarkdown from "react-markdown/with-html";
 import { CreatePostModal } from "..";
-import { updatePosts } from "../../actions";
+import {
+  updatePosts,
+  deletePost,
+  updateCurrentReadPostId
+} from "../../actions";
 import { message } from "antd";
 
 class ReadingPanel extends React.Component {
-  state = { 
-    showCreatePostModal: false, 
+  state = {
+    showCreatePostModal: false,
     // default is create a post mode when open create post modal
-    createPostModalMode: "create" };
+    createPostModalMode: "create"
+  };
 
   createPostModalRef = React.createRef();
 
@@ -67,6 +72,14 @@ class ReadingPanel extends React.Component {
     }
   };
 
+  deletePost = () => {
+    // TODO: prompt since it's a destructive action
+    // reset current read post id
+    this.props.dispatch(updateCurrentReadPostId(""));
+
+    this.props.dispatch(deletePost(this.props.currentReadPostId));
+  };
+
   dismissCreatePostModal = () => {
     this.setState({ showCreatePostModal: false });
     // update home's recent post list
@@ -76,6 +89,9 @@ class ReadingPanel extends React.Component {
   renderPostActionButton = () => {
     return (
       <div className={styles.postActions}>
+        <button className={styles.createPostButton} onClick={this.deletePost}>
+          删除
+        </button>
         <button className={styles.createPostButton} onClick={this.editPost}>
           修改
         </button>

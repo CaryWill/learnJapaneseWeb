@@ -7,7 +7,7 @@ import { rootReducer } from "./reducers";
 import rootSaga from "./sagas";
 import { Sidebar, ReadingPanel } from "./components";
 import styles from "./styles/styles.module.scss";
-import { login } from "./actions";
+import { login, deletePost } from "./actions";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
