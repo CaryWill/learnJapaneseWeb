@@ -20,6 +20,14 @@ class CreatePostModal extends React.Component {
     this.titleInputRef.current.focus();
   }
 
+  setBody = text => {
+    this.setState({ body: text });
+  };
+
+  setTitle = text => {
+    this.setState({ title: text });
+  };
+
   onChangeTitleInput = event => {
     this.setState({ title: event.target.value });
   };
@@ -29,14 +37,21 @@ class CreatePostModal extends React.Component {
   };
 
   publish = () => {
-    const date = Date.now();
-    const artist = this.props.user.email;
-    const type = "article";
-    const title = this.state.title;
+    const { mode } = this.props;
+    // default to create mode
     const body = this.state.body;
-    const categories = ["Others"];
-    const id = uuid();
+    const title = this.state.title;
     const description = "";
+    const type = "article";
+    const artist = this.props.user.email;
+    const date = Date.now();
+    const categories = ["Others"];
+    let id = uuid();
+    if (mode === "edit") {
+      // 保留之前的 post id，因为这个 id 要用来在数据库中作为索引寻找正在修改的 post 一遍 更新 update post
+      id = this.props.currentPost.id;
+    }
+
     const params = {
       date,
       artist,
@@ -57,7 +72,9 @@ class CreatePostModal extends React.Component {
 
   render() {
     return (
-      <div className={styles.modal}>
+      <div
+        className={classNames(styles.modal, this.props.visible && styles.show)}
+      >
         <div className={styles.body}>
           <input
             placeholder="Title"
@@ -107,4 +124,9 @@ class CreatePostModal extends React.Component {
   }
 }
 
-export default connect(({ user }) => ({ user }))(CreatePostModal);
+export default connect(
+  ({ user }) => ({ user }),
+  null,
+  null,
+  { forwardRef: true }
+)(CreatePostModal);

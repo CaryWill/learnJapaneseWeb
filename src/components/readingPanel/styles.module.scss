@@ -46,15 +46,18 @@
   }
 }
 
+.postActions {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
 .createPostButton {
   width: 85px;
   height: 35px;
   border-radius: 6px;
   background: black;
   color: white;
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
   outline: none;
   cursor: pointer;
 }

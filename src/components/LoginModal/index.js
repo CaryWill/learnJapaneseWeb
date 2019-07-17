@@ -117,4 +117,4 @@ class LoginModal extends React.Component {
   }
 }
 
-export default connect(({ user }) => ({ user: user }))(LoginModal);
+export default connect(({ user }) => ({ user: user }))(LoginModal)

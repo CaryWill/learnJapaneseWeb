@@ -4,9 +4,15 @@ import { connect } from "react-redux";
 import ReactMarkdown from "react-markdown/with-html";
 import { CreatePostModal } from "..";
 import { updatePosts } from "../../actions";
+import { message } from "antd";
 
 class ReadingPanel extends React.Component {
-  state = { showCreatePostModal: false };
+  state = { 
+    showCreatePostModal: false, 
+    // default is create a post mode when open create post modal
+    createPostModalMode: "create" };
+
+  createPostModalRef = React.createRef();
 
   renderContent = () => {
     const { posts, currentReadPostId } = this.props;
@@ -43,7 +49,22 @@ class ReadingPanel extends React.Component {
   };
 
   createPost = () => {
-    this.setState({ showCreatePostModal: true });
+    this.setState({ showCreatePostModal: true, createPostModalMode: "create" });
+  };
+
+  editPost = () => {
+    const currentPost = this.props.posts.all.find(
+      p => p.id === this.props.currentReadPostId
+    );
+
+    if (currentPost) {
+      this.setState({ showCreatePostModal: true, createPostModalMode: "edit" });
+      // initialize editor
+      this.createPostModalRef.current.setTitle(currentPost.title || "");
+      this.createPostModalRef.current.setBody(currentPost.body || "");
+    } else {
+      message.error("没有选中的文章!");
+    }
   };
 
   dismissCreatePostModal = () => {
@@ -52,24 +73,37 @@ class ReadingPanel extends React.Component {
     this.props.dispatch(updatePosts());
   };
 
-  renderCreatePostButton = () => {
+  renderPostActionButton = () => {
     return (
-      <button className={styles.createPostButton} onClick={this.createPost}>
-        New Post
-      </button>
+      <div className={styles.postActions}>
+        <button className={styles.createPostButton} onClick={this.editPost}>
+          修改
+        </button>
+        <button className={styles.createPostButton} onClick={this.createPost}>
+          创建
+        </button>
+      </div>
     );
   };
 
   render() {
+    const currentPost = this.props.posts.all.find(
+      p => p.id === this.props.currentReadPostId
+    );
+
     return (
       <div className={styles.readingPanel}>
         {this.renderContent()}
         {this.props.user &&
           this.props.user.email &&
-          this.renderCreatePostButton()}
-        {this.state.showCreatePostModal && (
-          <CreatePostModal onCancel={this.dismissCreatePostModal} />
-        )}
+          this.renderPostActionButton()}
+        <CreatePostModal
+          onCancel={this.dismissCreatePostModal}
+          visible={this.state.showCreatePostModal}
+          ref={this.createPostModalRef}
+          mode={this.state.createPostModalMode}
+          currentPost={currentPost}
+        />
       </div>
     );
   }
