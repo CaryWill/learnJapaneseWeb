@@ -73,6 +73,7 @@ class ReadingPanel extends React.Component {
   };
 
   deletePost = () => {
+    if (this.props.currentReadPostId === "") message.error("当前没有选中的文章")
     // TODO: prompt since it's a destructive action
     // reset current read post id
     this.props.dispatch(updateCurrentReadPostId(""));
