@@ -5,7 +5,11 @@ export const posts = (state = { all: [] }, action) => {
     case ActionTypes.UPDATE_POSTS_SUCCEEDED:
     case ActionTypes.DELETE_POST_SUCCEEDED:
       const { posts } = action.payload;
-      return { ...state, all: posts };
+      const sortedPosts = posts.sort(function(a, b) {
+        // latest post comes first
+        return new Date(b.date) - new Date(a.date);
+      });
+      return { ...state, all: sortedPosts };
     default:
       return state;
   }
