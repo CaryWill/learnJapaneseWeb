@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
 import createSagaMiddleware from "redux-saga";
@@ -7,6 +7,7 @@ import { rootReducer } from "./reducers";
 import rootSaga from "./sagas";
 import { Sidebar, ReadingPanel } from "./components";
 import styles from "./styles/styles.module.scss";
+import { login } from "./actions";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -14,10 +15,10 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const sagaMiddleware = createSagaMiddleware();
 
 const logger = store => next => action => {
-  console.log(action)
-  console.log(store.getState())
-  return next(action)
-}
+  console.log(action);
+  console.log(store.getState());
+  return next(action);
+};
 
 const store = createStore(
   rootReducer,
@@ -28,6 +29,12 @@ const store = createStore(
 sagaMiddleware.run(rootSaga);
 
 function App() {
+  useEffect(() => {
+    store.dispatch(
+      login(localStorage.getItem("account"), localStorage.getItem("password"))
+    );
+  }, []);
+
   return (
     <Provider store={store}>
       <div className={styles.app}>
