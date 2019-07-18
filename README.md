@@ -1,6 +1,6 @@
 # Share japanese-related stuff
 
-![img](https://carywill.github.io/learnJapaneseWeb/screenshots/screenshot1.png)
+![img](https://carywill.github.io/learnJapaneseWeb/screenshots/demo.gif)
 
 ## Techs used:
 
