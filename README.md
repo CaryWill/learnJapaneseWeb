@@ -8,6 +8,7 @@
 2. redux (manage App state)
 3. redux-saga (middle-ware for side effects)
 4. scss (styling)
+5. react-router
 
 ## TODO
 
