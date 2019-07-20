@@ -3,6 +3,7 @@ import { Input } from "antd";
 import { LoginModal } from "..";
 import styles from "./styles.module.scss";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { updatePosts, updateCurrentReadPostId } from "../../actions";
 import classNames from "classnames";
 
@@ -65,10 +66,15 @@ class Sidebar extends React.Component {
               this.setState({ showSearchResultModal: false });
             }}
           >
-            <span className={styles.postRowTitle}>{p.title}</span>
-            <span className={styles.postRowTimestamp}>
-              {p.date.slice(0, 10)}
-            </span>
+            <Link
+              style={{ color: "inherit", textDecoration: "inherit" }}
+              to={{ pathname: `/post/${p.title}`, state: { id: p.id } }}
+            >
+              <span className={styles.postRowTitle}>{p.title}</span>
+              <span className={styles.postRowTimestamp}>
+                {p.date.slice(0, 10)}
+              </span>
+            </Link>
           </div>
         ))}
       </section>
@@ -124,10 +130,21 @@ class Sidebar extends React.Component {
                         }}
                         key={p._id}
                       >
-                        <span className={styles.postRowTitle}>{p.title}</span>
-                        <span className={styles.postRowTimestamp}>
-                          {p.date.slice(0, 10)}
-                        </span>
+                        <Link
+                          style={{
+                            color: "inherit",
+                            textDecoration: "inherit"
+                          }}
+                          to={{
+                            pathname: `/post/${p.title}`,
+                            state: { id: p.id }
+                          }}
+                        >
+                          <span className={styles.postRowTitle}>{p.title}</span>
+                          <span className={styles.postRowTimestamp}>
+                            {p.date.slice(0, 10)}
+                          </span>
+                        </Link>
                       </div>
                     ))}
                 </div>
