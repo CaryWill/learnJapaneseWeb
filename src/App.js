@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import createSagaMiddleware from "redux-saga";
+import { Switch, Route } from "react-router";
 // TODO: use babel-plugin-module-resolver
 import { rootReducer } from "./reducers";
 import rootSaga from "./sagas";
-import { Sidebar, ReadingPanel } from "./components";
+import { Sidebar, ReadingPanel, NotFound } from "./components";
 import styles from "./styles/styles.module.scss";
 import { login, updateCurrentReadPostId } from "./actions";
 
@@ -60,8 +61,11 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
-        <Route path="/" component={Home} />
-        <Route path="/post/:postId" component={Home} />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/post/:postId" component={Home} />
+          <Route path="*" component={NotFound} />
+        </Switch>
       </Router>
     </Provider>
   );
