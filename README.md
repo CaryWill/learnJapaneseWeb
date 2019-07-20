@@ -1,6 +1,6 @@
 # Share japanese-related stuff
 
-![img](https://carywill.github.io/learnJapaneseWeb/screenshots/screenshot1.png)
+![img](https://carywill.github.io/learnJapaneseWeb/screenshots/demo.gif)
 
 ## Techs used:
 
@@ -8,6 +8,7 @@
 2. redux (manage App state)
 3. redux-saga (middle-ware for side effects)
 4. scss (styling)
+5. react-router
 
 ## TODO
 
@@ -30,3 +31,5 @@
 比如自动替换生产服务器和开发服务器
 
 - [X] 删除文章
+
+- [ ] ssr
