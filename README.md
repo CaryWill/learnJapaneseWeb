@@ -37,3 +37,5 @@
 - [ ] 增加日文注音
 
 - [ ] comments - disqus
+
+- [ ] animation
