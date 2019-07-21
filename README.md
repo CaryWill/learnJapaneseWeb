@@ -36,4 +36,4 @@
 
 - [ ] 增加日文注音
 
-- [ ] comments
+- [ ] comments - disqus
