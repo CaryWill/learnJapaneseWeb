@@ -38,4 +38,4 @@
 
 - [ ] comments - disqus
 
-- [ ] animation
+- [ ] [animation](https://saber.love/music) 挺喜欢这种风格的
