@@ -1,8 +1,8 @@
+import classNames from "classnames";
 import React from "react";
+import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 
-import classNames from "classnames";
-import {connect} from "react-redux";
 import {updateCurrentReadPostId} from "../../actions";
 import styles from "./styles.module.scss";
 
@@ -40,7 +40,7 @@ class SearchResultModal extends React.Component {
           >
             <Link
               style={{color: "inherit", textDecoration: "inherit"}}
-              to={{pathname: `/post/${p.title}`, state: {id: p.id}}}
+              to={{pathname: `/post/${p.date.slice(0, 10)}/${p.title}`, state: {id: p.id}}}
             >
               <span className={styles.postRowTitle}>{p.title}</span>
               <span className={styles.postRowTimestamp}>

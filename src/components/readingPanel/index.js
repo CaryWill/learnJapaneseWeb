@@ -1,7 +1,8 @@
+import {message} from "antd";
+import classNames from "classnames";
 import React from "react";
 import ReactMarkdown from "react-markdown/with-html";
 import {connect} from "react-redux";
-import {message} from "antd";
 
 import {Editor} from "..";
 import {
@@ -9,8 +10,6 @@ import {
   updateCurrentReadPostId,
   updatePosts
 } from "../../actions";
-
-import classNames from "classnames";
 import styles from "./styles.module.scss";
 
 class ReadingPanel extends React.Component {
@@ -67,6 +66,7 @@ class ReadingPanel extends React.Component {
     return (
       <>
         <span className={styles.title}>{(post && post.title) || ""}</span>
+        <h6 style={{textAlign: "right"}}>{post.date.slice(0, 10)}</h6>
         <ReactMarkdown
           className="markdown-body"
           escapeHtml={false}

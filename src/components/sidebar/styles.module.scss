@@ -71,48 +71,46 @@ nav {
     margin-top: 0;
     overflow: scroll;
   }
-  .postsHeaderBox {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-end;
-  }
-  .recentPostsHeader {
-    font-size: 25px;
-    font-weight: bold;
-    color: black;
-  }
-  .viewAllPosts {
-    font-size: 12px;
-    margin-bottom: 5px;
-  }
-  .postRow {
-    display: flex;
-    flex-direction: column;
-    padding: 8px;
-    border-radius: 6px;
-    color: black;
-    cursor: pointer;
-    margin: 3px 0;
-    &:hover {
-      background-color: black;
-      color: white;
-    }
-    @include respond-to(mobile) {
-      width: 100% !important;
-    }
-    .postRowTitle {
-      font-size: 14px;
-    }
-    .postRowTimestamp {
-      font-size: 12px;
-    }
-  }
-  .active {
+}
+
+.postsHeaderBox {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.recentPostsHeader {
+  font-size: 25px;
+  font-weight: bold;
+  color: black;
+}
+.viewAllPosts {
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+.postRow {
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  border-radius: 6px;
+  color: black;
+  cursor: pointer;
+  margin: 3px 0;
+  &:hover {
     background-color: black;
     color: white;
   }
+  @include respond-to(mobile) {
+    width: 100% !important;
+  }
+  .postRowTitle {
+    font-size: 14px;
+  }
+}
+.active {
+  background-color: black;
+  color: white;
 }
 
 .categoryRow {

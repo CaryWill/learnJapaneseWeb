@@ -1,12 +1,12 @@
-import React from "react";
 import {Input} from "antd";
+import classNames from "classnames";
+import React from "react";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
-import classNames from "classnames";
 
 import {LoginModal, SearchResultModal} from "..";
 import {updateCurrentReadPostId, updatePosts} from "../../actions";
-
+import {capitalize} from "../utility"
 import styles from "./styles.module.scss";
 
 const {Search} = Input;
@@ -42,42 +42,83 @@ class Sidebar extends React.Component {
     });
   };
 
-  renderPosts = (articles, limit = 200, showTitle = true) => {
+  toggleCategory = (category) => {
+    this.setState({
+      // 重复点击可 toggle
+      currentOpenedCategory:
+        this.state.currentOpenedCategory === category ? "" : category
+    })
+  }
+
+  onRowClick = (post) => {
+    this.props.dispatch(updateCurrentReadPostId(post.id));
+    this.setState({showSearchResultModal: false});
+  }
+
+  renderPostRow = (p, className) => {
+    return (<div
+      className={classNames(
+        className,
+        this.props.currentReadPostId === p.id && styles.active
+      )}
+      key={p._id}
+      onClick={() => this.onRowClick(p)}
+    >
+      <Link
+        style={{color: "inherit", textDecoration: "inherit"}}
+        to={{pathname: `/post/${p.date.slice(0, 10)}/${p.title}`, state: {id: p.id}}}
+      >
+        <time dateTime={p.date.slice(0, 10)} className={styles.postRowTitle}>{p.title}</time>
+      </Link>
+    </div>)
+  }
+
+  renderCategoryRow = (category, articles = []) => {
+    const count = articles.filter(a => a.categories.includes(category)).length;
+    const {currentOpenedCategory} = this.state;
     return (
-      <section className={styles.recentPosts}>
-        {articles && articles.length > 0 && showTitle && (
-          <div className={styles.postsHeaderBox}>
-            <span className={styles.recentPostsHeader}>近期文章</span>
-            <span
-              className={styles.viewAllPosts}
-              onClick={this.toggleViewAllPosts}
-            >
-              {this.state.isViewAllPosts ? "收起" : "查看全部"}
-            </span>
+      <React.Fragment key={category}>
+        <div
+          className={styles.categoryRow}
+          key={category}
+          onClick={() => this.toggleCategory(category)
+          }
+        >
+          <div className={styles.categoryRowText}>
+            <span>{capitalize(category)}</span>
+            <span className={styles.count}>{count}</span>
+          </div>
+          <span>
+            {currentOpenedCategory === category ? "∙" : "◦"}
+          </span>
+        </div>
+        {currentOpenedCategory === category && (
+          <div className={styles.postsByCategory}>
+            {articles
+              .filter(a => a.categories.includes(category))
+              .map(p => (
+                this.renderPostRow(p, styles.categoryPostRow)
+              ))}
           </div>
         )}
-        {articles.slice(0, this.state.isViewAllPosts ? limit : 3).map(p => (
-          <div
-            className={classNames(
-              styles.postRow,
-              this.props.currentReadPostId === p.id && styles.active
-            )}
-            key={p._id}
-            onClick={() => {
-              this.props.dispatch(updateCurrentReadPostId(p.id));
-              this.setState({showSearchResultModal: false});
-            }}
+      </React.Fragment>
+    )
+  }
+
+  renderPosts = (articles = []) => {
+    return (
+      <section className={styles.recentPosts}>
+        <div className={styles.postsHeaderBox}>
+          <span className={styles.recentPostsHeader}>近期文章</span>
+          <span
+            className={styles.viewAllPosts}
+            onClick={this.toggleViewAllPosts}
           >
-            <Link
-              style={{color: "inherit", textDecoration: "inherit"}}
-              to={{pathname: `/post/${p.title}`, state: {id: p.id}}}
-            >
-              <span className={styles.postRowTitle}>{p.title}</span>
-              <span className={styles.postRowTimestamp}>
-                {p.date.slice(0, 10)}
-              </span>
-            </Link>
-          </div>
+            {this.state.isViewAllPosts ? "收起" : "查看全部"}
+          </span>
+        </div>
+        {articles.slice(0, this.state.isViewAllPosts ? articles.length : 3).map(p => (
+          this.renderPostRow(p, styles.postRow)
         ))}
       </section>
     );
@@ -85,75 +126,14 @@ class Sidebar extends React.Component {
 
   renderCategories = (articles = []) => {
     const categories = articles.reduce((p, c) => {
-      p = [...p, ...c.categories];
-      return p;
+      return [...p, ...c.categories];
     }, []);
     const uniqueCategories = [...new Set(categories)];
 
     return (
       <section className={styles.recentPosts}>
-        {articles && articles.length > 0 && (
-          <span className={styles.recentPostsHeader}>分类</span>
-        )}
-        {uniqueCategories.map((c, index) => {
-          return (
-            <React.Fragment key={c}>
-              <div
-                className={styles.categoryRow}
-                key={index}
-                onClick={() =>
-                  this.setState({
-                    // 重复点击可 toggle
-                    currentOpenedCategory:
-                      this.state.currentOpenedCategory === c ? "" : c
-                  })
-                }
-              >
-                <div className={styles.categoryRowText}>
-                  <span>{c}</span>
-                  <span className={styles.count}>{`(${
-                    articles.filter(a => a.categories.includes(c)).length
-                    })`}</span>
-                </div>
-                <span>
-                  {this.state.currentOpenedCategory === c ? "∙" : "◦"}
-                </span>
-              </div>
-              {this.state.currentOpenedCategory === c && (
-                <div className={styles.postsByCategory}>
-                  {articles
-                    .filter(a => a.categories.includes(c))
-                    .map(p => (
-                      <div
-                        className={styles.categoryPostRow}
-                        onClick={() => {
-                          this.props.dispatch(updateCurrentReadPostId(p.id));
-                          this.setState({showSearchResultModal: false});
-                        }}
-                        key={p._id}
-                      >
-                        <Link
-                          style={{
-                            color: "inherit",
-                            textDecoration: "inherit"
-                          }}
-                          to={{
-                            pathname: `/post/${p.title}`,
-                            state: {id: p.id}
-                          }}
-                        >
-                          <span className={styles.postRowTitle}>{p.title}</span>
-                          <span className={styles.postRowTimestamp}>
-                            {p.date.slice(0, 10)}
-                          </span>
-                        </Link>
-                      </div>
-                    ))}
-                </div>
-              )}
-            </React.Fragment>
-          );
-        })}
+        <span className={styles.recentPostsHeader}>分类</span>
+        {uniqueCategories.map(category => this.renderCategoryRow(category, articles))}
       </section>
     );
   };
@@ -161,17 +141,17 @@ class Sidebar extends React.Component {
   renderHeader = () => {
     return (
       <nav>
-        {["近期文章" /** , "分类"*/].map((c, index) => {
-          return (
+        {["近期文章" /** , "分类"*/].map(c =>
+          (
             <span
               className={classNames(styles.item, styles.mobile)}
               onClick={() => this.setState({showSearchResultModal: true})}
-              key={index}
+              key={c}
             >
               {c}
             </span>
-          );
-        })}
+          )
+        )}
         <span
           className={classNames(styles.item, styles.login)}
           onClick={() => {
@@ -201,7 +181,7 @@ class Sidebar extends React.Component {
           className={styles.searchbar}
         />
         <div className={styles.desktop}>
-          {this.renderPosts(articles.all, 100)}
+          {this.renderPosts(articles.all)}
         </div>
         <div className={styles.desktop}>
           {this.renderCategories(articles.all)}
