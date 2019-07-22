@@ -1,6 +1,7 @@
 import { call, put, takeLatest } from "redux-saga/effects";
+
 import * as ActionTypes from "../actions/types";
-import { fetchPostsApi, deletePostApi } from "../services/index";
+import { deletePostApi,fetchPostsApi } from "../services/index";
 
 function* fetchPostsSaga(action) {
   const response = yield call(fetchPostsApi, action.payload.type);

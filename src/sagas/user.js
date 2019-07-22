@@ -1,6 +1,7 @@
-import { call, put, takeLatest } from "redux-saga/effects";
+import {call, put, takeLatest} from "redux-saga/effects";
+
 import * as ActionTypes from "../actions/types";
-import { loginApi } from "../services/index";
+import {loginApi} from "../services/index";
 
 function* loginSaga(action) {
   const {
@@ -14,7 +15,7 @@ function* loginSaga(action) {
   if (response.data.includes("success")) {
     yield put({
       type: ActionTypes.LOGIN_SUCCEEDED,
-      payload: { status: response.data, email, password }
+      payload: {status: response.data, email, password}
     });
     onSuccess();
     // save to local storage for auto login
@@ -23,7 +24,7 @@ function* loginSaga(action) {
   } else {
     yield put({
       type: ActionTypes.LOGIN_FAILED,
-      payload: { status: response.data }
+      payload: {status: response.data}
     });
     onFail();
     // remove account info from local storage to prevent auto login

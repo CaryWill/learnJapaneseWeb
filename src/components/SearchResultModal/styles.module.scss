@@ -1,0 +1,85 @@
+@import "../../styles/utils.scss";
+
+.modal {
+  width: 100%;
+  height: 100%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  flex-direction: column;
+  z-index: 4;
+  background: rgba(233, 234, 236, 0.9);
+  left: 0;
+  top: 0;
+}
+
+.body {
+  width: 450px;
+  height: 500px;
+  background: white;
+  border-radius: 8px;
+  padding: 0 30px;
+  position: relative;
+  @include respond-to(mobile) {
+    width: 90%;
+    padding: 0 10px;
+  }
+  .closeSign {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
+  .modalTitle {
+    font-size: 19px;
+    margin-top: 46px;
+    display: block;
+    text-align: center;
+  }
+}
+
+.show {
+  display: flex;
+}
+
+// 近期文章
+.posts {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 20px;
+  @include respond-to(mobile) {
+    width: 100%;
+    margin-right: 30px;
+    padding: 20px !important;
+    margin-top: 0;
+    overflow: scroll;
+  }
+  .postRow {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    border-radius: 6px;
+    color: black;
+    cursor: pointer;
+    margin: 3px 0;
+    &:hover {
+      background-color: black;
+      color: white;
+    }
+    @include respond-to(mobile) {
+      width: 100% !important;
+    }
+    .postRowTitle {
+      font-size: 14px;
+    }
+    .postRowTimestamp {
+      font-size: 12px;
+    }
+  }
+  .active {
+    background-color: black;
+    color: white;
+  }
+}

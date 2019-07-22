@@ -41,7 +41,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  div:first-child {
+  span:nth-child(1) {
     font-size: 80px;
   }
 }
@@ -50,19 +50,35 @@
   position: absolute;
   bottom: 20px;
   right: 20px;
+  overflow: hidden;
+  border-radius: 7px;
 }
 
-.createPostButton {
+.basePostActionButton {
   height: 35px;
   padding: 0 15px;
-  margin: 0 2px;
-  border-radius: 6px;
   background: black;
   color: white;
   outline: none;
   cursor: pointer;
   user-select: none;
+  border: none;
+}
+
+.deletePost {
   &:hover {
-    background: #34BE8B;
+    background: #c23733;
+  }
+}
+
+.editPost {
+  &:hover {
+    background: #44AF69;
+  }
+}
+
+.createPost {
+  &:hover {
+    background: #44AF69;
   }
 }

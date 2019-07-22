@@ -1,15 +1,16 @@
 import React, { useEffect } from "react";
-import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
+import { Route,Switch } from "react-router";
 import { BrowserRouter as Router } from "react-router-dom";
+import { applyMiddleware, compose,createStore } from "redux";
 import createSagaMiddleware from "redux-saga";
-import { Switch, Route } from "react-router";
+
+import { login, updateCurrentReadPostId } from "./actions";
+import { NotFound,ReadingPanel, Sidebar } from "./components";
 // TODO: use babel-plugin-module-resolver
 import { rootReducer } from "./reducers";
 import rootSaga from "./sagas";
-import { Sidebar, ReadingPanel, NotFound } from "./components";
 import styles from "./styles/styles.module.scss";
-import { login, updateCurrentReadPostId } from "./actions";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
