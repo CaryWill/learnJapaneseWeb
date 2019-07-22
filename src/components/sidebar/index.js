@@ -1,14 +1,15 @@
-import { Input } from "antd";
-import classNames from "classnames";
 import React from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import {Input} from "antd";
+import {connect} from "react-redux";
+import {Link} from "react-router-dom";
+import classNames from "classnames";
 
-import { LoginModal } from "..";
-import { updateCurrentReadPostId,updatePosts } from "../../actions";
+import {LoginModal, SearchResultModal} from "..";
+import {updateCurrentReadPostId, updatePosts} from "../../actions";
+
 import styles from "./styles.module.scss";
 
-const { Search } = Input;
+const {Search} = Input;
 class Sidebar extends React.Component {
   state = {
     isDropdown: false,
@@ -24,20 +25,20 @@ class Sidebar extends React.Component {
   }
 
   onSearch = keyword => {
-    this.setState({ showSearchResultModal: true, searchKeyword: keyword });
+    this.setState({showSearchResultModal: true, searchKeyword: keyword});
   };
 
   dismissSearchResultModal = () => {
-    this.setState({ showSearchResultModal: false });
+    this.setState({showSearchResultModal: false});
   };
 
   dismissLoginModal = () => {
-    this.setState({ showLoginModal: false });
+    this.setState({showLoginModal: false});
   };
 
   toggleViewAllPosts = () => {
     this.setState(prevState => {
-      return { isViewAllPosts: !prevState.isViewAllPosts };
+      return {isViewAllPosts: !prevState.isViewAllPosts};
     });
   };
 
@@ -64,12 +65,12 @@ class Sidebar extends React.Component {
             key={p._id}
             onClick={() => {
               this.props.dispatch(updateCurrentReadPostId(p.id));
-              this.setState({ showSearchResultModal: false });
+              this.setState({showSearchResultModal: false});
             }}
           >
             <Link
-              style={{ color: "inherit", textDecoration: "inherit" }}
-              to={{ pathname: `/post/${p.title}`, state: { id: p.id } }}
+              style={{color: "inherit", textDecoration: "inherit"}}
+              to={{pathname: `/post/${p.title}`, state: {id: p.id}}}
             >
               <span className={styles.postRowTitle}>{p.title}</span>
               <span className={styles.postRowTimestamp}>
@@ -112,7 +113,7 @@ class Sidebar extends React.Component {
                   <span>{c}</span>
                   <span className={styles.count}>{`(${
                     articles.filter(a => a.categories.includes(c)).length
-                  })`}</span>
+                    })`}</span>
                 </div>
                 <span>
                   {this.state.currentOpenedCategory === c ? "∙" : "◦"}
@@ -127,7 +128,7 @@ class Sidebar extends React.Component {
                         className={styles.categoryPostRow}
                         onClick={() => {
                           this.props.dispatch(updateCurrentReadPostId(p.id));
-                          this.setState({ showSearchResultModal: false });
+                          this.setState({showSearchResultModal: false});
                         }}
                         key={p._id}
                       >
@@ -138,7 +139,7 @@ class Sidebar extends React.Component {
                           }}
                           to={{
                             pathname: `/post/${p.title}`,
-                            state: { id: p.id }
+                            state: {id: p.id}
                           }}
                         >
                           <span className={styles.postRowTitle}>{p.title}</span>
@@ -164,7 +165,7 @@ class Sidebar extends React.Component {
           return (
             <span
               className={classNames(styles.item, styles.mobile)}
-              onClick={() => this.setState({ showSearchResultModal: true })}
+              onClick={() => this.setState({showSearchResultModal: true})}
               key={index}
             >
               {c}
@@ -174,7 +175,7 @@ class Sidebar extends React.Component {
         <span
           className={classNames(styles.item, styles.login)}
           onClick={() => {
-            this.setState({ showLoginModal: true });
+            this.setState({showLoginModal: true});
           }}
         >
           {this.props.user.status === "success"
@@ -186,37 +187,13 @@ class Sidebar extends React.Component {
   };
 
   render() {
-    const { posts: articles } = this.props;
+    const {posts: articles} = this.props;
+    const {showLoginModal, showSearchResultModal, searchKeyword} = this.state;
 
     return (
       <div className={styles.sidebar}>
-        {this.state.showLoginModal && (
-          <LoginModal onCancel={this.dismissLoginModal} />
-        )}
-        {this.state.showSearchResultModal && (
-          <div className={styles.modal}>
-            <div className={styles.body}>
-              <span
-                onClick={this.dismissSearchResultModal}
-                className={styles.closeSign}
-              >
-                &#10006;
-              </span>
-              <span className={styles.modalTitle}>文章列表</span>
-              {this.renderPosts(
-                articles.all.filter(p =>
-                  p.description
-                    ? p.description
-                        .toLowerCase()
-                        .includes(this.state.searchKeyword)
-                    : p
-                ),
-                100,
-                false
-              )}
-            </div>
-          </div>
-        )}
+        <LoginModal onCancel={this.dismissLoginModal} visible={showLoginModal} />
+        <SearchResultModal visible={showSearchResultModal} onCancel={this.dismissSearchResultModal} initialSearchKeyword={searchKeyword} />
         {this.renderHeader()}
         <Search
           placeholder="搜索"
@@ -234,7 +211,7 @@ class Sidebar extends React.Component {
   }
 }
 
-export default connect(({ posts, user, currentReadPostId }) => ({
+export default connect(({posts, user, currentReadPostId}) => ({
   posts,
   user,
   currentReadPostId

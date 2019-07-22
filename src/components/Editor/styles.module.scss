@@ -55,32 +55,35 @@
 
 // action button
 .actionBar {
-  width: 100%;
   display: flex;
   justify-content: flex-end;
+  align-self: flex-end;
+  background-color: rgb(233, 234, 236);
+  border-radius: 7px;
+  overflow: hidden;
+  position: absolute;
+  bottom: 20px;
+  color: black;
 }
 
-.confirm {
-  &:hover {
-    background-color: rgb(252, 248, 211);
-    color: black;
-    border-radius: 6px;
-  }
-}
-
-.cancel {
-  &:hover {
-    background-color: rgb(255, 125, 128);
-    color: white;
-    border-radius: 6px;
-  }
-}
-
-.previewBtn {
+.publish {
   &:hover {
     background-color: #00a896;
     color: white;
-    border-radius: 6px;
+  }
+}
+
+.onCancel {
+  &:hover {
+    background-color: rgb(255, 125, 128);
+    color: white;
+  }
+}
+
+.togglePreview {
+  &:hover {
+    background-color: #00a896;
+    color: white;
   }
 }
 
@@ -90,12 +93,8 @@
   padding: 0 10px;
   height: 35px;
   line-height: 35px;
-  color: rgb(135, 143, 154);
-  background-color: rgb(233, 234, 236);
-  border-radius: 7px;
   font-size: 17px;
   cursor: pointer;
-  margin: 0 5px;
   text-align: center;
 }
 

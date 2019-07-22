@@ -1,7 +1,7 @@
 .modal {
   width: 100vw;
   height: 100vh;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   position: absolute;
@@ -86,10 +86,14 @@
 }
 
 .logout {
-      border-radius: 5px;
-    border: none;
-    background: #BC2C1A;
-    color: white;
-    height: 30px;
-    width: 65px;
+  border-radius: 5px;
+  border: none;
+  background: #bc2c1a;
+  color: white;
+  height: 30px;
+  width: 65px;
+}
+
+.show {
+  display: flex;
 }

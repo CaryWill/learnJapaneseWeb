@@ -1,8 +1,8 @@
 import classNames from "classnames";
 import React from "react";
-import { connect } from "react-redux";
+import {connect} from "react-redux";
 
-import { login } from "../../actions";
+import {login} from "../../actions";
 import styles from "./styles.module.scss";
 
 class LoginModal extends React.Component {
@@ -34,11 +34,11 @@ class LoginModal extends React.Component {
   };
 
   onEmailChange = event => {
-    this.setState({ email: event.target.value, errmsg: "" });
+    this.setState({email: event.target.value, errmsg: ""});
   };
 
   onPasswordChange = event => {
-    this.setState({ password: event.target.value, errmsg: "" });
+    this.setState({password: event.target.value, errmsg: ""});
   };
 
   onSuccess = () => {
@@ -46,7 +46,7 @@ class LoginModal extends React.Component {
   };
 
   onFail = () => {
-    this.setState({ errmsg: "账号或密码错误!" });
+    this.setState({errmsg: "账号或密码错误!"});
   };
 
   onConfirm = () => {
@@ -86,7 +86,7 @@ class LoginModal extends React.Component {
         {this.state.errmsg && (
           <span className={styles.errmsg}>{`错误提示: ${
             this.state.errmsg
-          }`}</span>
+            }`}</span>
         )}
       </>
     );
@@ -109,7 +109,7 @@ class LoginModal extends React.Component {
 
   render() {
     return (
-      <div className={styles.modal} ref={this.modalRef}>
+      <div className={classNames(styles.modal, this.props.visible && styles.show)} ref={this.modalRef}>
         <div className={styles.body}>
           {this.props.user.email ? this.renderLogout() : this.renderLogin()}
         </div>
@@ -118,4 +118,4 @@ class LoginModal extends React.Component {
   }
 }
 
-export default connect(({ user }) => ({ user: user }))(LoginModal)
+export default connect(({user}) => ({user: user}))(LoginModal)
