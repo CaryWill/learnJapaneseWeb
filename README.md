@@ -34,7 +34,9 @@
 
 - [ ] ssr
 
-- [ ] 增加日文注音
+- [X] 增加日文注音
+
+直接使用 react-markdown 就可以了，然后 pass `unescapeHtml=true` 就可以了。
 
 - [ ] comments - disqus
 
