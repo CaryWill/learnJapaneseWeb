@@ -1,11 +1,13 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
 import "./index.css";
 // FIXME: babel 好像没用
 import "antd/dist/antd.css";
 // Markdown style
 import "github-markdown-css"
+
+import React from "react";
+import ReactDOM from "react-dom";
+
+import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(<App />, document.getElementById("root"));

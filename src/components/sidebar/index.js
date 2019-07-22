@@ -1,11 +1,12 @@
-import React from "react";
 import { Input } from "antd";
-import { LoginModal } from "..";
-import styles from "./styles.module.scss";
+import classNames from "classnames";
+import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { updatePosts, updateCurrentReadPostId } from "../../actions";
-import classNames from "classnames";
+
+import { LoginModal } from "..";
+import { updateCurrentReadPostId,updatePosts } from "../../actions";
+import styles from "./styles.module.scss";
 
 const { Search } = Input;
 class Sidebar extends React.Component {

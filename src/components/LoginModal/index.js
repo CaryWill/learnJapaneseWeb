@@ -1,8 +1,9 @@
-import React from "react";
-import styles from "./styles.module.scss";
-import { login } from "../../actions";
-import { connect } from "react-redux";
 import classNames from "classnames";
+import React from "react";
+import { connect } from "react-redux";
+
+import { login } from "../../actions";
+import styles from "./styles.module.scss";
 
 class LoginModal extends React.Component {
   state = {

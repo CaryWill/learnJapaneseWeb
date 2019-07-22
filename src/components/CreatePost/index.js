@@ -1,10 +1,11 @@
-import React from "react";
-import styles from "./styles.module.scss";
-import { postApi } from "../../services";
 import classNames from "classnames";
+import React from "react";
+import ReactMarkdown from "react-markdown/with-html";
 import { connect } from "react-redux";
 import uuid from "uuid/v4";
-import ReactMarkdown from "react-markdown/with-html";
+
+import { postApi } from "../../services";
+import styles from "./styles.module.scss";
 
 class CreatePostModal extends React.Component {
   // TODO: 增加 tag 也就是 category 的功能

@@ -1,14 +1,14 @@
+import { message } from "antd";
 import React from "react";
-import styles from "./styles.module.scss";
-import { connect } from "react-redux";
 import ReactMarkdown from "react-markdown/with-html";
+import { connect } from "react-redux";
+
 import { CreatePostModal } from "..";
 import {
-  updatePosts,
   deletePost,
-  updateCurrentReadPostId
-} from "../../actions";
-import { message } from "antd";
+  updateCurrentReadPostId,
+  updatePosts} from "../../actions";
+import styles from "./styles.module.scss";
 
 class ReadingPanel extends React.Component {
   state = {
