@@ -8,10 +8,10 @@ import {postApi} from "../../services";
 import styles from "./styles.module.scss";
 
 class Editor extends React.Component {
-  // TODO: 增加 tag 也就是 category 的功能
   state = {
     title: "",
     body: "",
+    categories: "",
     showPreview: true
   };
 
@@ -21,9 +21,10 @@ class Editor extends React.Component {
     this.titleInputRef.current.focus();
   }
 
-  init = (title, body) => {
+  init = (title, body, categories) => {
     if (title) this.setState({title})
     if (body) this.setState({body})
+    if (categories) this.setState({categories: JSON.stringify(categories)})
   }
 
   onChangeTitleInput = event => {
@@ -34,6 +35,10 @@ class Editor extends React.Component {
     this.setState({body: event.target.value});
   };
 
+  onChangeCategories = event => {
+    this.setState({categories: event.target.value});
+  }
+
   publish = () => {
     const {mode} = this.props;
     // default to `CREATE` mode
@@ -43,7 +48,7 @@ class Editor extends React.Component {
     const type = "article";
     const artist = this.props.user.email;
     const date = Date.now();
-    const categories = ["Others"];
+    const categories = JSON.parse(this.state.categories);
     let id = uuid();
     if (mode === "edit") {
       // NOTE: `edit` mode should keep post id unchanged, since we use post id to keep track of post in datebase. 
@@ -107,6 +112,12 @@ class Editor extends React.Component {
             value={this.state.title}
             onChange={this.onChangeTitleInput}
             ref={this.titleInputRef}
+          />
+          <input
+            placeholder={`请选择文章文类哦，格式如下，["music"]`}
+            className={styles.inputCategories}
+            value={this.state.categories}
+            onChange={this.onChangeCategories}
           />
           <textarea
             placeholder="Write the post, change the world..."

@@ -53,7 +53,7 @@ class ReadingPanel extends React.Component {
 
     this.setState({showEditor: true, editorMode: "edit"});
     // Initialize editor
-    this.editorRef.current.init(post.title, post.body);
+    this.editorRef.current.init(post.title, post.body, post.categories);
   };
 
   deletePost = (post) => {

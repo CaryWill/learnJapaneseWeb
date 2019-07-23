@@ -18,7 +18,6 @@ export function* fetchPosts(action) {
 
 // delete post
 function* deletePostSaga(action) {
-  console.log(action,"ac")
   const response = yield call(deletePostApi, action.payload.id);
 
   yield put({
