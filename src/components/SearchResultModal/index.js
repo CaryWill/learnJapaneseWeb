@@ -40,7 +40,7 @@ class SearchResultModal extends React.Component {
           >
             <Link
               style={{color: "inherit", textDecoration: "inherit"}}
-              to={{pathname: `/post/${p.date.slice(0, 10)}/${p.title}#disqus_thread`, state: {id: p.id}}}
+              to={{pathname: `/post/${p.date.slice(0, 10)}/${p.title}`, state: {id: p.id}}}
             >
               <span className={styles.postRowTitle}>{p.title}</span>
               <span className={styles.postRowTimestamp}>

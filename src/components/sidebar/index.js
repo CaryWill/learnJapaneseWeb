@@ -66,7 +66,7 @@ class Sidebar extends React.Component {
     >
       <Link
         style={{color: "inherit", textDecoration: "inherit"}}
-        to={{pathname: `/post/${p.date.slice(0, 10)}/${p.title}#disqus_thread`, state: {id: p.id}}}
+        to={{pathname: `/post/${p.date.slice(0, 10)}/${p.title}`, state: {id: p.id}}}
       >
         <time dateTime={p.date.slice(0, 10)} className={styles.postRowTitle}>{p.title}</time>
       </Link>
