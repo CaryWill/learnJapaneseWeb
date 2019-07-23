@@ -45,3 +45,7 @@
 完了，暴露了肥宅特质。
 
 - [ ] websocket
+
+- [ ] RSS
+
+- [ ] About me
