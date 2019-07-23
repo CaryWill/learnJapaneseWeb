@@ -1,13 +1,12 @@
-import classNames from "classnames";
 import React from "react";
 import ReactMarkdown from "react-markdown/with-html";
 import {connect} from "react-redux";
 import uuid from "uuid/v4";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 
 import {postApi} from "../../services";
 import styles from "./styles.module.scss";
-import {propTypes} from "react-markdown/lib/with-html";
 
 class Editor extends React.Component {
   state = {
