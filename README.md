@@ -38,7 +38,7 @@
 
 直接使用 react-markdown 就可以了，然后 pass `unescapeHtml=true` 就可以了。
 
-- [ ] comments - disqus
+- [X] comments - disqus
 
 - [ ] [animation](https://saber.love/music) 挺喜欢这种风格的
 
