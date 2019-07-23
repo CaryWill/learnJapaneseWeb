@@ -43,3 +43,5 @@
 - [ ] [animation](https://saber.love/music) 挺喜欢这种风格的
 
 完了，暴露了肥宅特质。
+
+- [ ] websocket
