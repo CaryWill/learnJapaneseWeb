@@ -112,6 +112,7 @@ class Editor extends React.Component {
             placeholder="Write the post, change the world..."
             onChange={this.onChangeBodyInput}
             value={this.state.body}
+            style={{fontSize: "15px"}}
           />
           {this.renderActionsBar()}
         </div>

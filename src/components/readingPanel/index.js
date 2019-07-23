@@ -18,7 +18,29 @@ class ReadingPanel extends React.Component {
     editorMode: "create" /** create | edit */
   };
 
+  componentDidMount() {
+    this.initDisqus()
+  }
+
+  componentDidUpdate({currentReadPostId: prevCId}) {
+    if (prevCId !== this.props.currentReadPostId) {
+      this.initDisqus();
+    }
+  }
+
   editorRef = React.createRef();
+
+  initDisqus = () => {
+    /** https://help.disqus.com/en/articles/1717137-use-configuration-variables-to-avoid-split-threads-and-missing-comments */
+    var disqus_config = function () {
+      this.page.identifier = this.props.currentReadPostId;
+    };
+
+    var d = document, s = d.createElement('script');
+    s.src = 'https://ljp-web.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', + new Date());
+    (d.head || d.body).appendChild(s);
+  }
 
   createPost = () => {
     this.setState({showEditor: true, editorMode: "create"});
@@ -112,6 +134,7 @@ class ReadingPanel extends React.Component {
           mode={this.state.editorMode}
           currentPost={currentPost}
         />
+        <div id="disqus_thread" className={cId === "" ? styles.hide : styles.show}></div>
       </div>
     );
   }
