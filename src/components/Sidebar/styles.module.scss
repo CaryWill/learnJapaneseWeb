@@ -1,0 +1,180 @@
+@import "src/styles/utils.scss";
+
+nav {
+  width: 100%;
+  text-align: right;
+  @include respond-to(mobile) {
+    display: flex !important;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 20px;
+  }
+  .item {
+    display: block;
+    padding: 0 10px;
+    height: 30px;
+    line-height: 30px;
+    color: rgb(146, 153, 163);
+    cursor: pointer;
+    &:hover {
+      background-color: rgb(242, 243, 243);
+      color: rgb(120, 129, 141);
+      border-radius: 6px;
+    }
+  }
+  .login {
+    @include respond-to(desktop) {
+      text-decoration: underline;
+    }
+  }
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 400px;
+  padding: 40px !important;
+  overflow: scroll;
+  user-select: none;
+  @include respond-to(mobile) {
+    flex-direction: row;
+    width: 100%;
+    height: 50px;
+    padding: 0 !important;
+    justify-content: space-between;
+    overflow: unset;
+  }
+}
+
+// 搜索
+.searchbar {
+  width: 100% !important;
+  margin: 10px 0 !important;
+  @include respond-to(mobile) {
+    display: none !important;
+  }
+}
+
+// 近期文章
+.recentPosts {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 20px;
+  @include respond-to(mobile) {
+    width: 100%;
+    margin-right: 30px;
+    padding: 20px !important;
+    margin-top: 0;
+    overflow: scroll;
+  }
+}
+
+.postsHeaderBox {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.recentPostsHeader {
+  font-size: 25px;
+  font-weight: bold;
+  color: black;
+}
+.viewAllPosts {
+  font-size: 12px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+.postRow {
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  border-radius: 6px;
+  color: black;
+  cursor: pointer;
+  margin: 3px 0;
+  &:hover {
+    background-color: black;
+    color: white;
+  }
+  @include respond-to(mobile) {
+    width: 100% !important;
+  }
+  .postRowTitle {
+    font-size: 14px;
+  }
+}
+.active {
+  background-color: black !important;
+  color: white !important;
+}
+
+.categoryRow {
+  display: flex;
+  flex-direction: row;
+  padding: 8px;
+  border-radius: 6px;
+  color: black;
+  font-size: 14px;
+  justify-content: space-between;
+  cursor: pointer;
+  &:hover {
+    background-color: black;
+    color: white;
+  }
+  @include respond-to(mobile) {
+    width: 100% !important;
+  }
+  .count {
+    padding-left: 5px;
+  }
+}
+
+.postsByCategory {
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
+}
+
+.categoryPostRow {
+  display: flex;
+  flex-direction: column;
+  padding: 7px;
+  border-radius: 6px;
+  background: white;
+  color: black;
+  cursor: pointer;
+  margin: 2px;
+  &:hover {
+    background-color: black;
+    color: white;
+  }
+  @include respond-to(mobile) {
+    width: 100% !important;
+  }
+  .postRowTitle {
+    font-size: 13px;
+  }
+  .postRowTimestamp {
+    font-size: 12px;
+  }
+}
+
+.desktop {
+  width: 100%;
+  @include respond-to(mobile) {
+    display: none !important;
+  }
+}
+
+.mobile {
+  display: none !important;
+  @include respond-to(mobile) {
+    display: flex !important;
+  }
+}

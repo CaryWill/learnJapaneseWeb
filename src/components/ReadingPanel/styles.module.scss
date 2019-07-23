@@ -1,0 +1,92 @@
+@import "src/styles/utils.scss";
+
+.readingPanel {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: left;
+  padding: 20px 40px;
+  border-left: 1px solid lightGrey;
+  border-top: none;
+  text-align: left;
+  overflow: scroll;
+  color: black;
+  font-family: "IBM Plex Mono", monospace;
+  @include respond-to(mobile) {
+    border-bottom: none;
+    height: calc(100% - 50px);
+    border-top: 1px solid lightGrey;
+    border-left: none;
+  }
+  .title {
+    font-size: 32px;
+    margin: 10px 0;
+    text-align: center;
+  }
+
+  :global {
+    .markdown-body {
+      font-family: "IBM Plex Mono", monospace;
+      color: black;
+      font-size: 17px;
+    }
+  }
+}
+
+.placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  span:nth-child(1) {
+    font-size: 80px;
+  }
+}
+
+.postActions {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  overflow: hidden;
+  border-radius: 7px;
+}
+
+.basePostActionButton {
+  height: 35px;
+  padding: 0 15px;
+  background: black;
+  color: white;
+  outline: none;
+  cursor: pointer;
+  user-select: none;
+  border: none;
+}
+
+.deletePost {
+  &:hover {
+    background: #c23733;
+  }
+}
+
+.editPost {
+  &:hover {
+    background: #44AF69;
+  }
+}
+
+.createPost {
+  &:hover {
+    background: #44AF69;
+  }
+}
+
+.show {
+  display: flex;
+}
+
+.hide {
+  display: none !important;
+}
