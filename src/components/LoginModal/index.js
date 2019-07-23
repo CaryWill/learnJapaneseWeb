@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 import {connect} from "react-redux";
+import PropTypes from "prop-types"
 
 import {login} from "../../actions";
 import styles from "./styles.module.scss";
@@ -116,6 +117,11 @@ class LoginModal extends React.Component {
       </div>
     );
   }
+}
+
+LoginModal.protoType = {
+  onCancel: PropTypes.func,
+  visible: PropTypes.bool
 }
 
 export default connect(({user}) => ({user: user}))(LoginModal)

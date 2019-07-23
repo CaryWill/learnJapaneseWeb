@@ -3,9 +3,11 @@ import React from "react";
 import ReactMarkdown from "react-markdown/with-html";
 import {connect} from "react-redux";
 import uuid from "uuid/v4";
+import PropTypes from "prop-types";
 
 import {postApi} from "../../services";
 import styles from "./styles.module.scss";
+import {propTypes} from "react-markdown/lib/with-html";
 
 class Editor extends React.Component {
   state = {
@@ -131,6 +133,27 @@ class Editor extends React.Component {
       </div>
     );
   }
+}
+
+Editor.propTypes = {
+  onCancel: PropTypes.func.isRequired,
+  visible: PropTypes.bool.isRequired,
+  mode: PropTypes.oneOf(["edit", "create"]),
+  currentPost: PropTypes.shape({
+    date: PropTypes.string,
+    artist: PropTypes.string,
+    type: PropTypes.oneOf(["article", "music", "video"]),
+    title: PropTypes.string,
+    body: PropTypes.string,
+    categories: PropTypes.arrayOf(PropTypes.string),
+    id: PropTypes.string,
+    description: PropTypes.string
+  })
+}
+
+Editor.defaultProps = {
+  mode: "create",
+  visible: false
 }
 
 export default connect(

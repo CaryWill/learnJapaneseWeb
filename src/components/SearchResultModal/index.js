@@ -2,6 +2,7 @@ import classNames from "classnames";
 import React from "react";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
+import PropTypes from "prop-types";
 
 import {updateCurrentReadPostId} from "../../actions";
 import styles from "./styles.module.scss";
@@ -53,7 +54,6 @@ class SearchResultModal extends React.Component {
     );
   };
 
-
   render() {
     const {onCancel, visible} = this.props;
     return (<div className={classNames(styles.modal, visible && styles.show)}>
@@ -69,6 +69,12 @@ class SearchResultModal extends React.Component {
       </div>
     </div>)
   }
+}
+
+SearchResultModal.propType = {
+  visible: PropTypes.bool,
+  onCancel: PropTypes.func,
+  initialSearchKeyword: PropTypes.string
 }
 
 export default connect(({posts}) => ({posts}))(SearchResultModal)
