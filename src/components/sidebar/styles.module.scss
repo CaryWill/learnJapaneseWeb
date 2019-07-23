@@ -88,6 +88,7 @@ nav {
 .viewAllPosts {
   font-size: 12px;
   margin-bottom: 5px;
+  cursor: pointer;
 }
 .postRow {
   display: flex;
@@ -109,8 +110,8 @@ nav {
   }
 }
 .active {
-  background-color: black;
-  color: white;
+  background-color: black !important;
+  color: white !important;
 }
 
 .categoryRow {
@@ -143,10 +144,12 @@ nav {
 .categoryPostRow {
   display: flex;
   flex-direction: column;
-  padding: 8px;
+  padding: 7px;
   border-radius: 6px;
+  background: white;
   color: black;
   cursor: pointer;
+  margin: 2px;
   &:hover {
     background-color: black;
     color: white;

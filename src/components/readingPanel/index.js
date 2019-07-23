@@ -32,6 +32,7 @@ class ReadingPanel extends React.Component {
 
   initDisqus = () => {
     /** https://help.disqus.com/en/articles/1717137-use-configuration-variables-to-avoid-split-threads-and-missing-comments */
+    // eslint-disable-next-line
     var disqus_config = function () {
       this.page.identifier = this.props.currentReadPostId;
     };
