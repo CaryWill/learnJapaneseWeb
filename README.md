@@ -51,3 +51,8 @@ https://ljpweb.netlify.com
 - [ ] RSS
 
 - [ ] About me
+
+- [ ] 分享功能
+
+- [ ] IFEEE 
+新文章同步到 twitter
